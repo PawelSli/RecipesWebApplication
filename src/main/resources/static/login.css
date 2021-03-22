@@ -11,3 +11,16 @@ body {
 .register-container{
     height: 80vh;
 }
+
+.my-card{
+    width: 30rem;
+}
+
+.card-text{
+    height: 10em;
+    overflow: auto;
+}
+
+.my-dish{
+    height: 30em;
+}
