@@ -1,11 +1,224 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<!--<html lang="en"  xmlns:th="http://www.thymeleaf.org">-->
 <head>
     <meta charset="UTF-8">
     <title>YourFavouriteRecipes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../static/main.css">
+    <script type="text/javascript" src="../static/scripts.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" defer></script>
 </head>
-<body>
-    <p>123</p>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark main">
+        <a class="navbar-brand" href="#">Oveneaten</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Recipies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Breakfasts</a>
+                        <a class="dropdown-item" href="#">Lunches</a>
+                        <!--<div class="dropdown-divider"></div>-->
+                        <a class="dropdown-item" href="#">Dinners</a>
+                        <a class="dropdown-item" href="#">Vegetarian dishes</a>
+                        <a class="dropdown-item" href="#">Etc.</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tips&Tricks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <a class="btn btn-outline-primary" href="#">Log in</a>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid col-12 main-container ">
+        <div class="row">
+            <div id="carouselExampleIndicators" class="carousel slide p-0  col-12 col-lg-7 bg-light" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner ">
+                    <div class="carousel-item active align-items-center " >
+                        <img class="d-block w-100 image-class  " src="../static/lunch.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item align-items-center " >
+                        <img class="d-block w-100 image-class  col-12" src="../static/breakfast.jpg"  alt="Second slide">
+                    </div>
+                    <div class="carousel-item align-items-center" >
+                        <img class="d-block w-100 image-class " src="../static/dinner.jpg" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="jumbotron jumbotron-fluid  bg-light text-dark col-12 col-lg-5 m-0">
+                <div class="container">
+                    <h1 class="display-4">Oveneaten</h1>
+                    <p class="lead">Do you have unused ham, cheese and yeast in the fridge? You don't know what to do with the flour and honey that have been sitting around for a month. Oveneaten can help. Simply search the ingredients you have in the search bar and we'll recommend dishes you can make with them.
+
+                        You can also search for recipes using the traditional name.
+                    </p>
+                    <nav class="navbar navbar-light ">
+                        <form class="form-inline">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPERIMENTAL -->
+    <!-- EXPERIMENTAL -->
+    <!-- EXPERIMENTAL -->
+
+    <p class="h3 text-dark  m-lg-2">Best dishes</p>
+
+    <div class="container main-container mt-1 col-12">
+        <div class="row">
+            <div id="bestDishes" class="carousel slide bg-light col-12" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner ">
+                    <div class="carousel-item active align-items-center " >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/lunch2.jpg" alt="First slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/lunch1.jfif" alt="First slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/lunch3.jpg" alt="First slide">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item align-items-center " >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/breakfast1.jpg"  alt="Second slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/breakfast2.jpg"  alt="Second slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/breakfast3.jpg"  alt="Second slide">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item align-items-center" >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes " src="../static/dinner1.jfif" alt="Third slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes " src="../static/dinner2.jpg" alt="Third slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes " src="../static/dinner3.jpg" alt="Third slide">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#bestDishes" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#bestDishes" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <p class="h3 text-dark m-lg-2">Newest dishes</p>
+    <div class="container main-container mt-1 col-12">
+        <div class="row">
+            <div id="newestDishes" class="carousel slide bg-light col-12" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#newestDishes" data-slide-to="0" class="active"></li>
+                    <li data-target="#newestDishes" data-slide-to="1"></li>
+                    <li data-target="#newestDishes" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner ">
+                    <div class="carousel-item active align-items-center " >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/lunch2.jpg" alt="First slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/lunch1.jfif" alt="First slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/lunch3.jpg" alt="First slide">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item align-items-center " >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/breakfast1.jpg"  alt="Second slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/breakfast2.jpg"  alt="Second slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes  " src="../static/breakfast3.jpg"  alt="Second slide">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item align-items-center" >
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes " src="../static/dinner1.jfif" alt="Third slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes " src="../static/dinner2.jpg" alt="Third slide">
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="d-block  best-dishes " src="../static/dinner3.jpg" alt="Third slide">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#newestDishes" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#newestDishes" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 </body>
-</html>

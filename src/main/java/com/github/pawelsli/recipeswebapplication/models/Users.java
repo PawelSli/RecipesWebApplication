@@ -1,9 +1,6 @@
 package com.github.pawelsli.recipeswebapplication.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,8 +9,11 @@ class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(columnDefinition = "email")
     private String email;
+    @Column(columnDefinition = "password")
     private String password;
+    @Column(columnDefinition = "created_at")
     private LocalDateTime created_at;
 
     public String getEmail() {

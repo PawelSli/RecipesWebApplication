@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-container{
+    height: 70vh;
+}
+
+.register-container{
+    height: 80vh;
+}
