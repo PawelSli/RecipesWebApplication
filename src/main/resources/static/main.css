@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+
+}
+
+
+.image-class{
+    width: auto;
+    height: 65vh;
+}
+
+.best-dishes{
+   height: 20em;
+    width: 90%;
+}
+
+.add-dish-container{
+    overflow-y: auto;
+}
+
