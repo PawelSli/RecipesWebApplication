@@ -11,7 +11,32 @@ class MainController {
 
     @GetMapping("/main")
     public String mainPage(Model model){
-        return "main";
+        return "index";
+    }
+
+    @GetMapping("/addDish")
+    public String addDish(Model model){
+        return "add-dish";
+    }
+
+    @GetMapping("/dish/")
+    public String showDish(Model model){
+        return "dish";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model){
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model){
+        return "register";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model){
+        return "search";
     }
 
 }

@@ -3,17 +3,17 @@ package com.github.pawelsli.recipeswebapplication.models;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+//@Entity
 class Users {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(columnDefinition = "email")
+    //@Column(columnDefinition = "email")
     private String email;
-    @Column(columnDefinition = "password")
+    //@Column(columnDefinition = "password")
     private String password;
-    @Column(columnDefinition = "created_at")
+    //@Column(columnDefinition = "created_at")
     private LocalDateTime created_at;
 
     public String getEmail() {
