@@ -1,13 +1,35 @@
 package com.github.pawelsli.recipeswebapplication.controllers;
 
 
+import com.github.pawelsli.recipeswebapplication.entity.Users;
+import com.github.pawelsli.recipeswebapplication.repository.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
+@RequestMapping("/api")
 class MainController {
+    @Autowired
+    private UsersRepository usersRepository;
+
+    @PostMapping("/add")
+    public @ResponseBody String addNewUser (@RequestBody @Validated Users users) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+
+        usersRepository.save(users);
+        return "Saved";
+    }
+
+    @GetMapping("/all")
+    public @ResponseBody Iterable<Users> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return usersRepository.findAll();
+    }
+
 
     @GetMapping("/main")
     public String mainPage(Model model){
@@ -19,7 +41,7 @@ class MainController {
         return "add-dish";
     }
 
-    @GetMapping("/dish/")
+    @GetMapping("/dish")
     public String showDish(Model model){
         return "dish";
     }

@@ -1,4 +1,4 @@
-package com.github.pawelsli.recipeswebapplication.models;
+package com.github.pawelsli.recipeswebapplication.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,10 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-//@Entity
-class Recipes {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+@Entity
+public class Recipes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String title;
