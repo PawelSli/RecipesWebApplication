@@ -1,9 +1,6 @@
 package com.github.pawelsli.recipeswebapplication.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,13 +8,19 @@ public class Recipes {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
     private int min_prep_time;
+    @Column(nullable = false)
     private int max_prep_time;
-    private LocalDateTime created_at;
+    @Column(nullable = false)
+    private LocalDateTime publicationDate;
+    @Column(nullable = false)
     private int difficulty;
+    @Column(nullable = false)
     private int people_num;
 
     public String getTitle() {
@@ -52,12 +55,13 @@ public class Recipes {
         this.max_prep_time = max_prep_time;
     }
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
+
+    public LocalDateTime getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setPublicationDate(LocalDateTime publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public int getDifficulty() {
