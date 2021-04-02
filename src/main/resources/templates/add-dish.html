@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>YourFavouriteRecipes</title>
@@ -9,8 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../static/login.css">
-    <script type="text/javascript" src="../static/add-dish.js" defer></script>
+    <link  rel="stylesheet" th:href="@{/login.css}">
+    <script type="text/javascript" th:src="@{/add-dish.js}" defer></script>
 </head>
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark main">
@@ -47,11 +47,11 @@
         </ul>
     </div>
 </nav>
-<div class="container col-6 bg-light text-capitalize  d-flex flex-column  justify-content-center mt-5 ">
+<div class="container col-12 bg-light text-capitalize  d-flex flex-column  justify-content-center mt-5 ">
     <div class="row justify-content-center ">
         <div class="col-6 align-items-center">
             <h1>Add dish</h1>
-            <form class="">
+            <form>
                 <div class="mb-3">
                     <label for="dishNameInput" class="form-label">Dish name</label>
                     <input type="text" class="form-control" id="dishNameInput" aria-describedby="usernameHelp">
@@ -81,9 +81,9 @@
                 </div>
                 <div class="mb-3">
                     <label  class="form-label">Define the number of components</label>
-                    <input id="generateIngredientsInput" type="number" class="form-control" min="1" max="30" placeholder="1">
+                    <input id="generateIngredientsInput" type="number" class="form-control" min="1" max="30" placeholder="Choose the number of ingredients for your dish:">
                 </div>
-                <button id="generateIngredientsButton"  class="btn btn-primary mb-4">Generate ingredients list</button>
+                <button id="generateIngredientsButton" type="button" class="btn btn-primary mb-4" >Generate ingredients list</button>
 
                 <div id="ingredients">
 
@@ -91,9 +91,9 @@
 
                 <div class="mb-3">
                     <label  class="form-label">Define the number of steps</label>
-                    <input id="generateStepsInput"  type="number" class="form-control" min="1" max="30" placeholder="1">
+                    <input id="generateStepsInput"  type="number" class="form-control" min="1" max="30" placeholder="Choose the number of steps for your dish:">
                 </div>
-                <button id="generateStepsButton"  class="btn btn-primary mb-4">Generate steps list</button>
+                <button id="generateStepsButton" type="button"   class="btn btn-primary mb-4">Generate steps list</button>
 
                 <div id="steps">
 

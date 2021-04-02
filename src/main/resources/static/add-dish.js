@@ -4,14 +4,14 @@ ingredientDiv=document.querySelector('#ingredients');
 stepsDiv=document.querySelector('#steps');
 
 
+
 function generateIngredients(){
-    removeAllElement('#ingredients');
     numbersOfIngredients=document.querySelector('#generateIngredientsInput').value;
-    if(numbersOfIngredients==0){
+    if(numbersOfIngredients==null || numbersOfIngredients==""){
         numbersOfIngredients=1;
         document.querySelector('#generateIngredientsInput').setAttribute('value','1');
     }
-
+    removeAllElement('#ingredients');
     for(i=0;i<numbersOfIngredients;i++){
         const template = document.querySelector("#ingredient-template");
         const clone =template.content.cloneNode(true);
@@ -22,12 +22,12 @@ function generateIngredients(){
 }
 
 function generateSteps() {
-    removeAllElement('#steps');
     numbersOfSteps=document.querySelector('#generateStepsInput').value;
-    if(numbersOfSteps==0){
+    if(numbersOfSteps==null || numbersOfSteps==""){
         numbersOfSteps=1;
         document.querySelector('#generateStepsInput').setAttribute('value','1');
     }
+    removeAllElement('#steps');
     for(i=0;i<numbersOfSteps;i++){
         const template = document.querySelector("#step-template");
         const clone =template.content.cloneNode(true);
@@ -41,6 +41,7 @@ function removeAllElement(divId){
     const elements = document.querySelector(divId);
     elements.textContent = '';
 }
+
 
 generateIngredientButton.addEventListener("click",generateIngredients);
 generateStepsButton.addEventListener("click",generateSteps);

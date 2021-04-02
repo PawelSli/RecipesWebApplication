@@ -12,8 +12,12 @@ import java.util.List;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
-    @Autowired
     RecipeRepository recipeRepository;
+
+    @Autowired
+    public RecipeServiceImpl(RecipeRepository recipeRepository){
+        this.recipeRepository=recipeRepository;
+    }
 
     @Override
     public Recipes addRecipe(Recipes recipes) {
@@ -27,7 +31,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipes> getNewestRecipes() {
-        return recipeRepository.findAll();
+        return recipeRepository.findFirst10ByOrderByPublicationDateDesc();
     }
 
     @Override
@@ -37,6 +41,6 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipes findRecipyById(Integer id) {
-        return null;
+        return recipeRepository.findById(id).orElse(null);
     }
 }

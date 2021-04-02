@@ -30,7 +30,6 @@ class MainController {
         return usersRepository.findAll();
     }
 
-
     @GetMapping("/main")
     public String mainPage(Model model){
         return "index";
