@@ -3,14 +3,25 @@ package com.github.pawelsli.recipeswebapplication.entity;
 //import javax.persistence.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @OneToMany
+    @JoinColumn(name = "users")
+    private List<Recipes> recipesList;
+
+    @OneToOne
+    @JoinColumn(name = "recipes_id")
+    private UsersDetails usersDetails;
+
     private String email;
     private String password;
+    private LocalDateTime jointAt;
 
     public String getEmail() {
         return email;
@@ -28,4 +39,19 @@ public class Users {
         this.password = password;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getJointAt() {
+        return jointAt;
+    }
+
+    public void setJointAt(LocalDateTime jointAt) {
+        this.jointAt = jointAt;
+    }
 }

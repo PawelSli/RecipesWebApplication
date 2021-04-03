@@ -2,26 +2,37 @@ package com.github.pawelsli.recipeswebapplication.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Recipes {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(nullable = false)
+    private Long id;
+
+    @OneToMany(mappedBy = "recipes")
+    private List<Steps> stepsList;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private Users users;
+
     private String title;
-    @Column(nullable = false)
     private String description;
-    @Column(nullable = false)
-    private int min_prep_time;
-    @Column(nullable = false)
-    private int max_prep_time;
-    @Column(nullable = false)
+    private Long min_prep_time;
+    private Long max_prep_time;
+    private Long time_unit;
     private LocalDateTime publicationDate;
-    @Column(nullable = false)
-    private int difficulty;
-    @Column(nullable = false)
-    private int people_num;
+    private RecipeDifficulty difficulty;
+    private Long people_num;
+    private String image;
+    private Long likes;
+    private Long dislikes;
+
+    @OneToMany(mappedBy = "recipes")
+    Set<RecipesIngredients> recipesIngredientsSet;
+
 
     public String getTitle() {
         return title;
@@ -39,22 +50,21 @@ public class Recipes {
         this.description = description;
     }
 
-    public int getMin_prep_time() {
+    public Long getMin_prep_time() {
         return min_prep_time;
     }
 
-    public void setMin_prep_time(int min_prep_time) {
+    public void setMin_prep_time(Long min_prep_time) {
         this.min_prep_time = min_prep_time;
     }
 
-    public int getMax_prep_time() {
+    public Long getMax_prep_time() {
         return max_prep_time;
     }
 
-    public void setMax_prep_time(int max_prep_time) {
+    public void setMax_prep_time(Long max_prep_time) {
         this.max_prep_time = max_prep_time;
     }
-
 
     public LocalDateTime getPublicationDate() {
         return publicationDate;
@@ -64,19 +74,51 @@ public class Recipes {
         this.publicationDate = publicationDate;
     }
 
-    public int getDifficulty() {
+    public RecipeDifficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(int difficulty) {
+    public void setDifficulty(RecipeDifficulty difficulty) {
         this.difficulty = difficulty;
     }
 
-    public int getPeople_num() {
+    public Long getPeople_num() {
         return people_num;
     }
 
-    public void setPeople_num(int people_num) {
+    public void setPeople_num(Long people_num) {
         this.people_num = people_num;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
+
+    public Long getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(Long dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    public Long getTime_unit() {
+        return time_unit;
+    }
+
+    public void setTime_unit(Long time_unit) {
+        this.time_unit = time_unit;
     }
 }
