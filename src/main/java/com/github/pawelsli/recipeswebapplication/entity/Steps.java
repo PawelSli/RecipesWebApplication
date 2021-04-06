@@ -6,11 +6,12 @@ import javax.persistence.*;
 public class Steps {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name="id",nullable=false,unique=true)
+    private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "recipes_id")
-    private Ingredients ingredients;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=true)
+    private Recipes recipe;
 
     private String description;
     private Long number;

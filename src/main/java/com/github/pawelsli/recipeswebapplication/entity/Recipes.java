@@ -2,21 +2,22 @@ package com.github.pawelsli.recipeswebapplication.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name="recipes")
 public class Recipes {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name="id",nullable=false,unique=true)
+    private long id;
 
-    @OneToMany(mappedBy = "recipes")
-    private List<Steps> stepsList;
+    @OneToMany(mappedBy = "recipe")
+    private Set<Steps> steps;
 
     @ManyToOne
     @JoinColumn(name = "users_id")
-    private Users users;
+    private Users user;
 
     private String title;
     private String description;
@@ -30,9 +31,32 @@ public class Recipes {
     private Long likes;
     private Long dislikes;
 
-    @OneToMany(mappedBy = "recipes")
-    Set<RecipesIngredients> recipesIngredientsSet;
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipesIngredients> recipesIngredientsSet;
 
+    public Set<Steps> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(Set<Steps> stepsList) {
+        this.steps = stepsList;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public Set<RecipesIngredients> getRecipesIngredientsSet() {
+        return recipesIngredientsSet;
+    }
+
+    public void setRecipesIngredientsSet(Set<RecipesIngredients> recipesIngredientsSet) {
+        this.recipesIngredientsSet = recipesIngredientsSet;
+    }
 
     public String getTitle() {
         return title;

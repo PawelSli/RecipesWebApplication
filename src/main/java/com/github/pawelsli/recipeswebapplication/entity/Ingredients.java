@@ -7,11 +7,11 @@ import java.util.Set;
 public class Ingredients {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name="id",nullable=false,unique=true)
+    private long id;
     private String title;
-
-    @OneToMany(mappedBy = "ingredients")
-    Set<RecipesIngredients> recipesIngredientsSet;
+    @OneToMany(mappedBy = "ingredient")
+    private Set<RecipesIngredients> recipesIngredientsSet;
 
     public String getTitle() {
         return title;
@@ -19,5 +19,13 @@ public class Ingredients {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Set<RecipesIngredients> getRecipesIngredientsSet() {
+        return recipesIngredientsSet;
+    }
+
+    public void setRecipesIngredientsSet(Set<RecipesIngredients> recipesIngredientsSet) {
+        this.recipesIngredientsSet = recipesIngredientsSet;
     }
 }

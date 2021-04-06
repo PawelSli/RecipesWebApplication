@@ -9,15 +9,15 @@ import java.util.List;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id",nullable=false,unique=true)
     private long id;
 
-    @OneToMany
-    @JoinColumn(name = "users")
+    @OneToMany(mappedBy = "user")
     private List<Recipes> recipesList;
 
     @OneToOne
-    @JoinColumn(name = "recipes_id")
-    private UsersDetails usersDetails;
+    @JoinColumn(name = "usersdetails_id")
+    private UsersDetails userDetails;
 
     private String email;
     private String password;

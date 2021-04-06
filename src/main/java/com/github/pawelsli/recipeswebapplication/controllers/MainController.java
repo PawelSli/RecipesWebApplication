@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api")
 class MainController {
     @Autowired
     private UsersRepository usersRepository;
