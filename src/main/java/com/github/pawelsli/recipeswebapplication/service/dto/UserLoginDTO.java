@@ -1,15 +1,11 @@
-package com.github.pawelsli.recipeswebapplication.entity;
+package com.github.pawelsli.recipeswebapplication.service.dto;
 
-//import javax.persistence.*;
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import com.sun.istack.NotNull;
 
-@Entity
-public class Users {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class UserLoginDTO {
+    @NotNull
     private String email;
+    @NotNull
     private String password;
 
     public String getEmail() {
@@ -27,5 +23,4 @@ public class Users {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

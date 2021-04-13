@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<!--<html lang="en"  xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>YourFavouriteRecipes</title>
@@ -10,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark main">
@@ -51,26 +50,31 @@
     <div class="row justify-content-center ">
         <div class="col-6 align-items-center">
             <h1>Register</h1>
-            <form class="">
+            <form th:action="@{/register}" th:object="${userRegisterDTO}" method="post">
                 <div class="mb-3">
-                    <label for="usernamteInput" class="form-label">Email address</label>
-                    <input type="text" class="form-control" id="usernamteInput" aria-describedby="usernameHelp">
-                    <div id="usernameHelp" class="form-text">Username can contain any letters or numbers, without spaces.</div>
+                    <label for="useremail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="useremail" name="useremail" t aria-describedby="useremailHelp">
+                    <div id="useremailHelp" class="form-text">Provide your email</div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">Please provide your e-mail</div>
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" class="form-control" th:field="*{name}" id="username" name="username" aria-describedby="usernameHelp">
+                    <div id="usernameHelp" class="form-text">Name can contain any letters or numbers, without spaces.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="myPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="myPassword" aria-describedby="passwordHelp">
-                    <div id="passwordHelp" class="form-text">Password should be at least 4 characters.</div>
+                    <label for="usersurname" class="form-label">Surname</label>
+                    <input type="text" class="form-control" th:field="*{surname}" id="usersurname" name="usersurname" aria-describedby="usersurnameHelp">
+                    <div id="usersurnameHelp" class="form-text">Surname can contain any letters or numbers, without spaces.</div>
                 </div>
                 <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Confirm address</label>
-                    <input type="password" class="form-control" id="confirmPassword" aria-describedby="confirmPasswordHelp">
-                    <div id="confirmPasswordHelp" class="form-text">Please confirm password.</div>
+                    <label for="userphone" class="form-label">Phone number</label>
+                    <input type="text" class="form-control" th:field="*{phone}" id="userphone" name="userphone" aria-describedby="userphoneHelp">
+                    <div id="userphoneHelp" class="form-text">Phone number can contain only digits.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="userpassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" th:field="*{password}" id="userpassword" name="userpassword" aria-describedby="userpasswordHelp">
+                    <div id="userpasswordHelp" class="form-text">Password should be at least 4 characters.</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>

@@ -1,48 +1,61 @@
 package com.github.pawelsli.recipeswebapplication.controllers;
 
 
-import com.github.pawelsli.recipeswebapplication.entity.Users;
-import com.github.pawelsli.recipeswebapplication.repository.UsersRepository;
+import com.github.pawelsli.recipeswebapplication.entity.User;
+import com.github.pawelsli.recipeswebapplication.entity.UserDetails;
+import com.github.pawelsli.recipeswebapplication.repository.UserRepository;
+import com.github.pawelsli.recipeswebapplication.service.UserDetailsService;
+import com.github.pawelsli.recipeswebapplication.service.UserServiceImpl;
+import com.github.pawelsli.recipeswebapplication.service.dto.UserRegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Map;
+
 @Controller
-@RequestMapping("/api")
 class MainController {
     @Autowired
-    private UsersRepository usersRepository;
-
-    @PostMapping("/add")
-    public @ResponseBody String addNewUser (@RequestBody @Validated Users users) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-
-        usersRepository.save(users);
-        return "Saved";
-    }
-
-    @GetMapping("/all")
-    public @ResponseBody Iterable<Users> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return usersRepository.findAll();
-    }
-
-    @GetMapping("/main")
-    public String mainPage(Model model){
-        return "index";
-    }
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserServiceImpl userService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @GetMapping("/addDish")
-    public String addDish(Model model){
+    public String addDish(){
         return "add-dish";
     }
 
-    @GetMapping("/dish")
-    public String showDish(Model model){
-        return "dish";
+    @GetMapping("/register")
+    public String register(Model model){
+        model.addAttribute("userRegisterDTO",new UserRegisterDTO());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String addNewUser(UserRegisterDTO userRegisterDTO){
+        User user =new User();
+        user.setEmail(userRegisterDTO.getEmail());
+        user.setJointAt(LocalDateTime.now());
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+
+
+        UserDetails userDetails=new UserDetails();
+        userDetails.setName(userRegisterDTO.getName());
+        userDetails.setSurname(userRegisterDTO.getSurname());
+        userDetails.setPhone(Long.parseLong(userRegisterDTO.getPhone()));
+        userDetails.setUser(user);
+        user.setUserDetails(userDetails);
+
+        userService.createUser(user);
+        userDetailsService.createUserDetails(userDetails);
+        return "login";
+
     }
 
     @GetMapping("/login")
@@ -50,10 +63,22 @@ class MainController {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String register(Model model){
-        return "register";
+
+    @GetMapping("/main")
+    public String mainPage(Model model){
+        return "index";
     }
+
+
+
+    @GetMapping("/dish")
+    public String showDish(Model model){
+        return "dish";
+    }
+
+
+
+
 
     @GetMapping("/search")
     public String search(Model model){

@@ -1,11 +1,8 @@
 package com.github.pawelsli.recipeswebapplication.service;
 
-import com.github.pawelsli.recipeswebapplication.entity.Recipes;
+import com.github.pawelsli.recipeswebapplication.entity.Recipe;
 import com.github.pawelsli.recipeswebapplication.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,27 +17,27 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipes addRecipe(Recipes recipes) {
-        return recipeRepository.save(recipes);
+    public Recipe addRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
     }
 
     @Override
-    public List<Recipes> getRecipes() {
+    public List<Recipe> getRecipes() {
         return recipeRepository.findAll();
     }
 
     @Override
-    public List<Recipes> getNewestRecipes() {
+    public List<Recipe> getNewestRecipes() {
         return recipeRepository.findFirst10ByOrderByPublicationDateDesc();
     }
 
     @Override
-    public List<Recipes> getMostPopularRecipes() {
+    public List<Recipe> getMostPopularRecipes() {
         return null;
     }
 
     @Override
-    public Recipes findRecipyById(Integer id) {
+    public Recipe findRecipyById(Integer id) {
         return recipeRepository.findById(id).orElse(null);
     }
 }
