@@ -4,14 +4,15 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Ingredients {
+@Table(name = "ingredients")
+public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
     private long id;
     private String title;
     @OneToMany(mappedBy = "ingredient")
-    private Set<RecipesIngredients> recipesIngredientsSet;
+    private Set<RecipeIngredient> recipeIngredientSet;
 
     public String getTitle() {
         return title;
@@ -21,11 +22,11 @@ public class Ingredients {
         this.title = title;
     }
 
-    public Set<RecipesIngredients> getRecipesIngredientsSet() {
-        return recipesIngredientsSet;
+    public Set<RecipeIngredient> getRecipeIngredientSet() {
+        return recipeIngredientSet;
     }
 
-    public void setRecipesIngredientsSet(Set<RecipesIngredients> recipesIngredientsSet) {
-        this.recipesIngredientsSet = recipesIngredientsSet;
+    public void setRecipeIngredientSet(Set<RecipeIngredient> recipeIngredientSet) {
+        this.recipeIngredientSet = recipeIngredientSet;
     }
 }

@@ -3,17 +3,18 @@ package com.github.pawelsli.recipeswebapplication.entity;
 import javax.persistence.*;
 
 @Entity
-public class UsersDetails {
+@Table(name = "users_details")
+public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
     private long id;
-
-
     private String name;
     private String surname;
     private Long phone;
     private String image;
+    @OneToOne(mappedBy = "userDetails")
+    private User user;
 
     public String getName() {
         return name;
@@ -45,5 +46,13 @@ public class UsersDetails {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.pawelsli</groupId>
-	<artifactId>recipes-web-application</artifactId>
+	<artifactId>recipe-web-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>recipes-web-application</name>
+	<name>recipe-web-application</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>15</java.version>
@@ -54,6 +54,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 
 		<!-- Configuration -->
 		<dependency>

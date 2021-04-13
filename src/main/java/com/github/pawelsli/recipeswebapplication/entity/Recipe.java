@@ -6,19 +6,16 @@ import java.util.Set;
 
 @Entity
 @Table(name="recipes")
-public class Recipes {
+public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
     private long id;
-
     @OneToMany(mappedBy = "recipe")
-    private Set<Steps> steps;
-
+    private Set<Step> steps;
     @ManyToOne
-    @JoinColumn(name = "users_id")
-    private Users user;
-
+    @JoinColumn(name = "user_id")
+    private User user;
     private String title;
     private String description;
     private Long min_prep_time;
@@ -30,32 +27,33 @@ public class Recipes {
     private String image;
     private Long likes;
     private Long dislikes;
-
     @OneToMany(mappedBy = "recipe")
-    private Set<RecipesIngredients> recipesIngredientsSet;
+    private Set<RecipeIngredient> recipeIngredientSet;
 
-    public Set<Steps> getSteps() {
+
+
+    public Set<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(Set<Steps> stepsList) {
-        this.steps = stepsList;
+    public void setSteps(Set<Step> stepList) {
+        this.steps = stepList;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Set<RecipesIngredients> getRecipesIngredientsSet() {
-        return recipesIngredientsSet;
+    public Set<RecipeIngredient> getRecipeIngredientSet() {
+        return recipeIngredientSet;
     }
 
-    public void setRecipesIngredientsSet(Set<RecipesIngredients> recipesIngredientsSet) {
-        this.recipesIngredientsSet = recipesIngredientsSet;
+    public void setRecipeIngredientSet(Set<RecipeIngredient> recipeIngredientSet) {
+        this.recipeIngredientSet = recipeIngredientSet;
     }
 
     public String getTitle() {

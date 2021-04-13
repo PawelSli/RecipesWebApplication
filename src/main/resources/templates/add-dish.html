@@ -44,6 +44,9 @@
                 <a class="nav-link" href="#">Contact</a>
             </li>
             <a class="btn btn-outline-primary" href="#">Log in</a>
+            <form th:action="@{/logout}" method="post">
+                <a class="btn btn-outline-primary" th:href="@{/login}">Log out</a>
+            </form>
         </ul>
     </div>
 </nav>
