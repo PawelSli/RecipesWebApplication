@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>recipe-web-application</name>
 	<description>Demo project for Spring Boot</description>
+	<property name="hbm2ddl.auto">create</property>
 	<properties>
 		<java.version>15</java.version>
 		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>

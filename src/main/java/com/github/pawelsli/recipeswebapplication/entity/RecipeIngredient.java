@@ -19,8 +19,6 @@ public class RecipeIngredient {
     private Long quantity;
     private IngredientUnit ingredientUnit;
 
-
-
     public Recipe getRecipe() {
         return recipe;
     }
