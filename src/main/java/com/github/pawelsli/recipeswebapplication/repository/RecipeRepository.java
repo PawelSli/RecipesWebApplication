@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RecipeRepository extends JpaRepository<Recipe,Integer> {
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findFirst10ByOrderByPublicationDateDesc();
-    List<Recipe> findFirst10ByOrderByDifficultyDesc();
 }

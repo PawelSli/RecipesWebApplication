@@ -1,20 +1,18 @@
-package com.github.pawelsli.recipeswebapplication.entity;
+package com.github.pawelsli.recipeswebapplication.service.dto;
+
+import com.github.pawelsli.recipeswebapplication.entity.RecipeDifficulty;
+import com.github.pawelsli.recipeswebapplication.entity.RecipeIngredient;
+import com.github.pawelsli.recipeswebapplication.entity.Step;
+import com.github.pawelsli.recipeswebapplication.entity.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name="recipes")
-public class Recipe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",nullable=false,unique=true)
-    private Long id;
-    @OneToMany(mappedBy = "recipe")
+public class RecipeDTO {
+
+    private long id;
     private List<Step> steps;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
     private String title;
     private String description;
@@ -22,29 +20,27 @@ public class Recipe {
     private Long max_prep_time;
     private Long time_unit;
     private LocalDateTime publicationDate;
-    @Enumerated(EnumType.STRING)
     private RecipeDifficulty difficulty;
     private Long people_num;
     private String image;
     private Long likes;
     private Long dislikes;
-    @OneToMany(mappedBy = "recipe")
     private List<RecipeIngredient> recipeIngredientSet;
 
-    public Recipe() {
-
+    public long getId() {
+        return id;
     }
 
-    public Long getId() {
-        return id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public List<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<Step> stepList) {
-        this.steps = stepList;
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
     }
 
     public User getUser() {
@@ -53,14 +49,6 @@ public class Recipe {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<RecipeIngredient> getRecipeIngredientSet() {
-        return recipeIngredientSet;
-    }
-
-    public void setRecipeIngredientSet(List<RecipeIngredient> recipeIngredientSet) {
-        this.recipeIngredientSet = recipeIngredientSet;
     }
 
     public String getTitle() {
@@ -93,6 +81,14 @@ public class Recipe {
 
     public void setMax_prep_time(Long max_prep_time) {
         this.max_prep_time = max_prep_time;
+    }
+
+    public Long getTime_unit() {
+        return time_unit;
+    }
+
+    public void setTime_unit(Long time_unit) {
+        this.time_unit = time_unit;
     }
 
     public LocalDateTime getPublicationDate() {
@@ -143,11 +139,11 @@ public class Recipe {
         this.dislikes = dislikes;
     }
 
-    public Long getTime_unit() {
-        return time_unit;
+    public List<RecipeIngredient> getRecipeIngredientSet() {
+        return recipeIngredientSet;
     }
 
-    public void setTime_unit(Long time_unit) {
-        this.time_unit = time_unit;
+    public void setRecipeIngredientSet(List<RecipeIngredient> recipeIngredientSet) {
+        this.recipeIngredientSet = recipeIngredientSet;
     }
 }

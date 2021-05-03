@@ -4,7 +4,9 @@ package com.github.pawelsli.recipeswebapplication.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -13,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id",nullable=false,unique=true)
-    private long id;
+    private Long id;
 
     @OneToMany(mappedBy = "user")
     private List<Recipe> recipeList;
@@ -27,11 +29,9 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime jointAt;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "surname")
-    private String surname;
 
     @Column(name = "phone")
     private String phone;
@@ -47,21 +47,29 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
 
-    private Collection < Role > roles;
+    private Set<Role> roles = new HashSet<>();
 
-    public User(){}
+    public User(){
+    }
 
-    public User(String name, String surname, String email, String password,
-                Collection < Role > roles, LocalDateTime jointAt, String phone,String image) {
-        super();
-        this.name=name;
-        this.surname=surname;
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String username, String email, String password,
+                Set<Role> roles, LocalDateTime jointAt, String phone) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
         this.jointAt=jointAt;
         this.phone=phone;
-        this.image=image;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Collection<Role> getRoles() {
@@ -84,12 +92,8 @@ public class User {
         return jointAt;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
+    public String getUsername() {
+        return username;
     }
 
     public String getPhone() {
@@ -100,7 +104,7 @@ public class User {
         return image;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -120,12 +124,8 @@ public class User {
         this.jointAt = jointAt;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPhone(String phone) {
