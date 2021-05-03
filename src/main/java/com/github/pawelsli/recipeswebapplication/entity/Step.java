@@ -8,7 +8,7 @@ public class Step {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
-    private long id;
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=true)
     private Recipe recipe;

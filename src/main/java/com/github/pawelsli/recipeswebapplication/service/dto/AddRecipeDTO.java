@@ -1,55 +1,23 @@
 package com.github.pawelsli.recipeswebapplication.service.dto;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.pawelsli.recipeswebapplication.entity.RecipeDifficulty;
-import com.github.pawelsli.recipeswebapplication.entity.RecipeIngredient;
-import com.github.pawelsli.recipeswebapplication.entity.Step;
 import com.github.pawelsli.recipeswebapplication.entity.User;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
-public class RecipeDTO {
-
-    private long id;
-    private List<Step> steps;
-    private User user;
+public class AddRecipeDTO {
     private String title;
     private String description;
     private Long min_prep_time;
     private Long max_prep_time;
     private Long time_unit;
+    @JsonIgnore
     private LocalDateTime publicationDate;
     private RecipeDifficulty difficulty;
     private Long people_num;
     private String image;
-    private Long likes;
-    private Long dislikes;
-    private List<RecipeIngredient> recipeIngredientSet;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public List<Step> getSteps() {
-        return steps;
-    }
-
-    public void setSteps(List<Step> steps) {
-        this.steps = steps;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getTitle() {
         return title;
@@ -123,27 +91,25 @@ public class RecipeDTO {
         this.image = image;
     }
 
-    public Long getLikes() {
-        return likes;
-    }
+    /*public RecipeDTO convertToRecipeDTO(List<StepDTO> stepDTOList,List<RecipeIngredientDTO> recipeIngredientDTOList){
 
-    public void setLikes(Long likes) {
-        this.likes = likes;
-    }
+                private long id;
+            private List<Step> steps;
+            private User user;
+            private String title;
+            private String description;
+            private Long min_prep_time;
+            private Long max_prep_time;
+            private Long time_unit;
+            private LocalDateTime publicationDate;
+            private RecipeDifficulty difficulty;
+            private Long people_num;
+            private String image;
+            private Long likes;
+            private Long dislikes;
+            private List<RecipeIngredient> recipeIngredientSet;
 
-    public Long getDislikes() {
-        return dislikes;
-    }
-
-    public void setDislikes(Long dislikes) {
-        this.dislikes = dislikes;
-    }
-
-    public List<RecipeIngredient> getRecipeIngredientSet() {
-        return recipeIngredientSet;
-    }
-
-    public void setRecipeIngredientSet(List<RecipeIngredient> recipeIngredientSet) {
-        this.recipeIngredientSet = recipeIngredientSet;
-    }
+        RecipeDTO recipeDTO=new RecipeDTO();
+        recipeDTO.setSteps();
+    }*/
 }

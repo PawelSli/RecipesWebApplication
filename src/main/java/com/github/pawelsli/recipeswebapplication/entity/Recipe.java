@@ -2,7 +2,7 @@ package com.github.pawelsli.recipeswebapplication.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="recipes")
@@ -10,9 +10,9 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
-    private long id;
+    private Long id;
     @OneToMany(mappedBy = "recipe")
-    private Set<Step> steps;
+    private List<Step> steps;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -22,21 +22,28 @@ public class Recipe {
     private Long max_prep_time;
     private Long time_unit;
     private LocalDateTime publicationDate;
+    @Enumerated(EnumType.STRING)
     private RecipeDifficulty difficulty;
     private Long people_num;
     private String image;
     private Long likes;
     private Long dislikes;
     @OneToMany(mappedBy = "recipe")
-    private Set<RecipeIngredient> recipeIngredientSet;
+    private List<RecipeIngredient> recipeIngredientSet;
 
+    public Recipe() {
 
+    }
 
-    public Set<Step> getSteps() {
+    public Long getId() {
+        return id;
+    }
+
+    public List<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(Set<Step> stepList) {
+    public void setSteps(List<Step> stepList) {
         this.steps = stepList;
     }
 
@@ -48,11 +55,11 @@ public class Recipe {
         this.user = user;
     }
 
-    public Set<RecipeIngredient> getRecipeIngredientSet() {
+    public List<RecipeIngredient> getRecipeIngredientSet() {
         return recipeIngredientSet;
     }
 
-    public void setRecipeIngredientSet(Set<RecipeIngredient> recipeIngredientSet) {
+    public void setRecipeIngredientSet(List<RecipeIngredient> recipeIngredientSet) {
         this.recipeIngredientSet = recipeIngredientSet;
     }
 

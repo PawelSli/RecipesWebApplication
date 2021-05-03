@@ -17,6 +17,9 @@ function generateIngredients(){
         const clone =template.content.cloneNode(true);
         label=clone.querySelector('label.text-info');
         label.innerHTML='Ingredient nr '+(i+1);
+        input=clone.querySelector('div.form-control');
+        input.setAttribute('th:field','')
+
         ingredientDiv.appendChild(clone);
     }
 }

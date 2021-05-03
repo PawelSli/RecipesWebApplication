@@ -9,7 +9,7 @@ public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
-    private long id;
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=true)
     private Recipe recipe;
@@ -17,6 +17,7 @@ public class RecipeIngredient {
     @JoinColumn(name = "ingredient_id",referencedColumnName="id",nullable=false,unique=true)
     private Ingredient ingredient;
     private Long quantity;
+    @Enumerated(EnumType.STRING)
     private IngredientUnit ingredientUnit;
 
     public Recipe getRecipe() {

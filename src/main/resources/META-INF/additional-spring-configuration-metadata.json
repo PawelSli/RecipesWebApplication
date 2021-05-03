@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "RecipesWebApplication.app.jwtExpirationMs",
+      "type": "java.lang.String",
+      "description": "Description for RecipesWebApplication.app.jwtExpirationMs."
+  }
+] }
