@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Search from "./components/Search";
 import Dish from "./components/Dish";
 import PrivateRoute from './components/PrivateRoute';
+import MainPage from "./components/MainPage";
 
 
 class App extends Component {
@@ -54,6 +55,7 @@ class App extends Component {
               <Route exact path="/api/auth/signin" component={Login} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/dish" component={Dish} />
+              <Route exact path="/mainPage" component={MainPage} />
             </Switch>
           </div>
 
