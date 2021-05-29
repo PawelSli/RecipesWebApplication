@@ -1,5 +1,6 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+import http from "../http-common";
 const API_URL = "http://localhost:8080/";
 
 class DishService{
@@ -14,9 +15,18 @@ class DishService{
 
 
     getAddDishPage(){
-        console.log("Heeeee");
         return axios.get(API_URL+"addDish",{headers: authHeader()})
+    }
 
+    upload(file){
+        let formData = new FormData();
+        formData.append("file",file);
+        return http.post("/addDish",formData,{
+            headers: {
+                "Content-Type": "multipart/form-data",
+
+            },
+        })
     }
 }
 
