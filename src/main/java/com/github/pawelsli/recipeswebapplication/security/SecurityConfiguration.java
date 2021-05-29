@@ -23,6 +23,14 @@ import org.springframework.web.cors.CorsConfiguration;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
  class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
+    private static final String[] AUTH_WHITELIST = {
+            // -- swagger ui
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+    };
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -73,6 +81,7 @@ import org.springframework.web.cors.CorsConfiguration;
                 .antMatchers("/api/auth/signup").permitAll()
                 .antMatchers("/mainPage").permitAll()
                 .antMatchers("/recipe/**").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -80,6 +89,7 @@ import org.springframework.web.cors.CorsConfiguration;
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**", "/webjars/**","/js/**","/img/**");
+
     }
 
     @Bean

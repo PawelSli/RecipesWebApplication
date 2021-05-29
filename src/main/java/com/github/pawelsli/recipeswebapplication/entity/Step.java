@@ -10,7 +10,7 @@ public class Step {
     @Column(name="id",nullable=false,unique=true)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=true)
+    @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false)
     private Recipe recipe;
     private String description;
     private Long number;

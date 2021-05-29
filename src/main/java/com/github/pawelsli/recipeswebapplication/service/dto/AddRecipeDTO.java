@@ -2,61 +2,117 @@ package com.github.pawelsli.recipeswebapplication.service.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.pawelsli.recipeswebapplication.entity.IngredientUnit;
 import com.github.pawelsli.recipeswebapplication.entity.RecipeDifficulty;
-import com.github.pawelsli.recipeswebapplication.entity.User;
+import org.javatuples.Quartet;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddRecipeDTO {
-    private String title;
-    private String description;
-    private Long min_prep_time;
-    private Long max_prep_time;
-    private Long time_unit;
+    @JsonIgnore
+    private Long userID;
+    private String dishName;
+    private String dishDesc;
+    private Long preparationTimeQuantity;
+    private String preparationTimeUnit;
+    private Long numberOfPeople;
+    private String difficulty;
+    private List<String> steps;
+    private List<String> ingredients;
+    private List<String> ingredientsUnits;
+    private List<String> ingredientsQuantities;
     @JsonIgnore
     private LocalDateTime publicationDate;
-    private RecipeDifficulty difficulty;
-    private Long people_num;
-    private String image;
 
-    public String getTitle() {
-        return title;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDishName() {
+        return dishName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
     }
 
-    public Long getMin_prep_time() {
-        return min_prep_time;
+    public String getDishDesc() {
+        return dishDesc;
     }
 
-    public void setMin_prep_time(Long min_prep_time) {
-        this.min_prep_time = min_prep_time;
+    public void setDishDesc(String dishDesc) {
+        this.dishDesc = dishDesc;
     }
 
-    public Long getMax_prep_time() {
-        return max_prep_time;
+    public Long getPreparationTimeQuantity() {
+        return preparationTimeQuantity;
     }
 
-    public void setMax_prep_time(Long max_prep_time) {
-        this.max_prep_time = max_prep_time;
+    public void setPreparationTimeQuantity(Long preparationTimeQuantity) {
+        this.preparationTimeQuantity = preparationTimeQuantity;
     }
 
-    public Long getTime_unit() {
-        return time_unit;
+    public String getPreparationTimeUnit() {
+        return preparationTimeUnit;
     }
 
-    public void setTime_unit(Long time_unit) {
-        this.time_unit = time_unit;
+    public void setPreparationTimeUnit(String preparationTimeUnit) {
+        this.preparationTimeUnit = preparationTimeUnit;
+    }
+
+    public Long getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(Long numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public List<String> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<String> getIngredientsUnits() {
+        return ingredientsUnits;
+    }
+
+    public void setIngredientsUnits(List<String> ingredientsUnits) {
+        this.ingredientsUnits = ingredientsUnits;
+    }
+
+    public List<String> getIngredientsQuantities() {
+        return ingredientsQuantities;
+    }
+
+    public void setIngredientsQuantities(List<String> ingredientsQuantities) {
+        this.ingredientsQuantities = ingredientsQuantities;
     }
 
     public LocalDateTime getPublicationDate() {
@@ -67,49 +123,48 @@ public class AddRecipeDTO {
         this.publicationDate = publicationDate;
     }
 
-    public RecipeDifficulty getDifficulty() {
-        return difficulty;
+    public Quartet<RecipeDTO, List<StepDTO>, List<IngredientDTO>,List<RecipeIngredientDTO>> convertToRecipeDTO() {
+
+        RecipeDTO recipeDTO = new RecipeDTO();
+        recipeDTO.setUserId(userID);
+        recipeDTO.setTitle(dishName);
+        recipeDTO.setDescription(dishDesc);
+        recipeDTO.setPreparationTime(preparationTimeQuantity);
+        recipeDTO.setTimeUnit(preparationTimeUnit);
+        recipeDTO.setPublicationDate(LocalDateTime.now());
+        recipeDTO.setDifficulty(RecipeDifficulty.valueOf(difficulty));
+        recipeDTO.setPeopleNum(numberOfPeople);
+
+        AtomicInteger atomicInteger = new AtomicInteger();
+
+        atomicInteger.set(0);
+        List<StepDTO> stepDTOList = new ArrayList<>();
+        steps.forEach(e -> {
+            if(atomicInteger.get()!=0){
+                StepDTO stepDTO = new StepDTO();
+                stepDTO.setDescription(e);
+                stepDTO.setNumber((long) atomicInteger.get());
+                stepDTOList.add(stepDTO);
+            }
+            atomicInteger.getAndIncrement();
+        });
+
+        atomicInteger.set(0);
+        List<IngredientDTO> ingredientDTOList = new ArrayList<>();
+        List<RecipeIngredientDTO> recipeIngredientDTOS = new ArrayList<>();
+        ingredients.forEach(e -> {
+            if(atomicInteger.get()!=0){
+                IngredientDTO ingredientDTO = new IngredientDTO();
+                ingredientDTO.setTitle(e);
+                ingredientDTOList.add(ingredientDTO);
+                RecipeIngredientDTO recipeIngredientDTO = new RecipeIngredientDTO();
+                recipeIngredientDTO.setIngredientQuantity(Long.parseLong(ingredientsQuantities.get(atomicInteger.get())));
+                recipeIngredientDTO.setIngredientUnit(IngredientUnit.valueOf(ingredientsUnits.get(atomicInteger.get())));
+                recipeIngredientDTOS.add(recipeIngredientDTO);
+            }
+            atomicInteger.incrementAndGet();
+        });
+        atomicInteger.set(0);
+        return Quartet.with(recipeDTO, stepDTOList, ingredientDTOList,recipeIngredientDTOS);
     }
-
-    public void setDifficulty(RecipeDifficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Long getPeople_num() {
-        return people_num;
-    }
-
-    public void setPeople_num(Long people_num) {
-        this.people_num = people_num;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    /*public RecipeDTO convertToRecipeDTO(List<StepDTO> stepDTOList,List<RecipeIngredientDTO> recipeIngredientDTOList){
-
-                private long id;
-            private List<Step> steps;
-            private User user;
-            private String title;
-            private String description;
-            private Long min_prep_time;
-            private Long max_prep_time;
-            private Long time_unit;
-            private LocalDateTime publicationDate;
-            private RecipeDifficulty difficulty;
-            private Long people_num;
-            private String image;
-            private Long likes;
-            private Long dislikes;
-            private List<RecipeIngredient> recipeIngredientSet;
-
-        RecipeDTO recipeDTO=new RecipeDTO();
-        recipeDTO.setSteps();
-    }*/
 }

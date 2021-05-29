@@ -18,10 +18,9 @@ public class Recipe {
     private User user;
     private String title;
     private String description;
-    private Long min_prep_time;
-    private Long max_prep_time;
-    private Long time_unit;
-    private LocalDateTime publicationDate;
+    private Long preparation_time;
+    private String time_unit;
+    private LocalDateTime publication_date;
     @Enumerated(EnumType.STRING)
     private RecipeDifficulty difficulty;
     private Long people_num;
@@ -79,28 +78,20 @@ public class Recipe {
         this.description = description;
     }
 
-    public Long getMin_prep_time() {
-        return min_prep_time;
+    public Long getPreparation_time() {
+        return preparation_time;
     }
 
-    public void setMin_prep_time(Long min_prep_time) {
-        this.min_prep_time = min_prep_time;
+    public void setPreparation_time(Long preparationTime) {
+        this.preparation_time = preparationTime;
     }
 
-    public Long getMax_prep_time() {
-        return max_prep_time;
+    public LocalDateTime getPublication_date() {
+        return publication_date;
     }
 
-    public void setMax_prep_time(Long max_prep_time) {
-        this.max_prep_time = max_prep_time;
-    }
-
-    public LocalDateTime getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(LocalDateTime publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setPublication_date(LocalDateTime publicationDate) {
+        this.publication_date = publicationDate;
     }
 
     public RecipeDifficulty getDifficulty() {
@@ -143,11 +134,11 @@ public class Recipe {
         this.dislikes = dislikes;
     }
 
-    public Long getTime_unit() {
+    public String getTime_unit() {
         return time_unit;
     }
 
-    public void setTime_unit(Long time_unit) {
+    public void setTime_unit(String time_unit) {
         this.time_unit = time_unit;
     }
 }
