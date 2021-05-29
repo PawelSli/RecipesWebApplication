@@ -11,7 +11,7 @@ public class RecipeIngredient {
     @Column(name="id",nullable=false,unique=true)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=true)
+    @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=false)
     private Recipe recipe;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ingredient_id",referencedColumnName="id",nullable=false,unique=true)

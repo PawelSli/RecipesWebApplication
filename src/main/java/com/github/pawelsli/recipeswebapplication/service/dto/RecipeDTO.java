@@ -1,31 +1,25 @@
 package com.github.pawelsli.recipeswebapplication.service.dto;
 
+import com.github.pawelsli.recipeswebapplication.entity.Recipe;
 import com.github.pawelsli.recipeswebapplication.entity.RecipeDifficulty;
-import com.github.pawelsli.recipeswebapplication.entity.RecipeIngredient;
-import com.github.pawelsli.recipeswebapplication.entity.Step;
-import com.github.pawelsli.recipeswebapplication.entity.User;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class RecipeDTO {
 
     private long id;
-    private List<Step> steps;
-    private User user;
+    private List<Long> stepsIds;
+    private Long userId;
     private String title;
     private String description;
-    private Long min_prep_time;
-    private Long max_prep_time;
-    private Long time_unit;
+    private Long preparationTime;
+    private String timeUnit;
     private LocalDateTime publicationDate;
     private RecipeDifficulty difficulty;
-    private Long people_num;
-    private String image;
+    private Long peopleNum;
+    private String imageName;
     private Long likes;
     private Long dislikes;
-    private List<RecipeIngredient> recipeIngredientSet;
 
     public long getId() {
         return id;
@@ -35,20 +29,20 @@ public class RecipeDTO {
         this.id = id;
     }
 
-    public List<Step> getSteps() {
-        return steps;
+    public List<Long> getStepsIds() {
+        return stepsIds;
     }
 
-    public void setSteps(List<Step> steps) {
-        this.steps = steps;
+    public void setStepsIds(List<Long> stepsIds) {
+        this.stepsIds = stepsIds;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -67,28 +61,20 @@ public class RecipeDTO {
         this.description = description;
     }
 
-    public Long getMin_prep_time() {
-        return min_prep_time;
+    public Long getPreparationTime() {
+        return preparationTime;
     }
 
-    public void setMin_prep_time(Long min_prep_time) {
-        this.min_prep_time = min_prep_time;
+    public void setPreparationTime(Long preparationTime) {
+        this.preparationTime = preparationTime;
     }
 
-    public Long getMax_prep_time() {
-        return max_prep_time;
+    public String getTimeUnit() {
+        return timeUnit;
     }
 
-    public void setMax_prep_time(Long max_prep_time) {
-        this.max_prep_time = max_prep_time;
-    }
-
-    public Long getTime_unit() {
-        return time_unit;
-    }
-
-    public void setTime_unit(Long time_unit) {
-        this.time_unit = time_unit;
+    public void setTimeUnit(String timeUnit) {
+        this.timeUnit = timeUnit;
     }
 
     public LocalDateTime getPublicationDate() {
@@ -107,20 +93,20 @@ public class RecipeDTO {
         this.difficulty = difficulty;
     }
 
-    public Long getPeople_num() {
-        return people_num;
+    public Long getPeopleNum() {
+        return peopleNum;
     }
 
-    public void setPeople_num(Long people_num) {
-        this.people_num = people_num;
+    public void setPeopleNum(Long peopleNum) {
+        this.peopleNum = peopleNum;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public Long getLikes() {
@@ -139,11 +125,19 @@ public class RecipeDTO {
         this.dislikes = dislikes;
     }
 
-    public List<RecipeIngredient> getRecipeIngredientSet() {
-        return recipeIngredientSet;
-    }
+    public Recipe convertToRecipe(){
+        Recipe recipe = new Recipe();
+        recipe.setTitle(title);
+        recipe.setDescription(description);
+        recipe.setPreparation_time(preparationTime);
+        recipe.setTime_unit(timeUnit);
+        recipe.setPublication_date(publicationDate);
+        recipe.setDifficulty(difficulty);
+        recipe.setPeople_num(peopleNum);
+        recipe.setImage(imageName);
+        recipe.setLikes(0L);
+        recipe.setDislikes(0L);
 
-    public void setRecipeIngredientSet(List<RecipeIngredient> recipeIngredientSet) {
-        this.recipeIngredientSet = recipeIngredientSet;
+        return recipe;
     }
 }
