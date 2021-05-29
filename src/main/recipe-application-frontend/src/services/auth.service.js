@@ -11,7 +11,6 @@ class AuthService {
             }
             return response.data;
         });
-
     }
 
     isLogged(){

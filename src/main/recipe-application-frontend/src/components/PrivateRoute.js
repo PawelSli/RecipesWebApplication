@@ -1,10 +1,12 @@
 import React from 'react'
 import AuthService from "../services/auth.service";
+import DishService from "../services/dish.service";
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const isLoggedIn = AuthService.isLogged()
+
 
     return (
         <Route
