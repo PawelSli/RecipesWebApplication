@@ -1,8 +1,37 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "../App";
+import DishService from "../services/dish.service"
 
 class Dish extends Component{
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            dishTitle: null,
+            dishDesc: null,
+            dishPreparationTime: null,
+            dishNumberOfPerson: null,
+            dishDifficutly: null,
+            dishSteps: [],
+            dishIngredients: [],
+            dishIngredientsUnits: [],
+            dishIngredientsQuantities: []
+        };
+        /*
+        DishService.getSpecificRecipe().then(
+            response => {
+                this.setState()
+            },
+            error => {
+
+            }
+        )*/
+
+    }
+
+
     render() {
         return (
             <div>
