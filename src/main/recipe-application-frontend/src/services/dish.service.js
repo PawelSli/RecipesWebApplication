@@ -9,8 +9,13 @@ class DishService{
         return axios.get(API_URL);
     }
 
-    getSpecificRecipe(){
-        return axios.get(API_URL+"/recipe/${id}");
+    getSpecificRecipe(index){
+        return axios.get(API_URL+`recipe/${index}`,{
+            headers:{
+                'Access-Control-Allow-Origin': true
+            },
+            mode : 'cors'
+        });
     }
 
 
