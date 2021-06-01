@@ -23,7 +23,10 @@ class UploadFilesService{
         formData.set("ingredientsQuantities",ingredientsQuantities);
 
 
-        console.log(formData.get("dishName"));
+        console.log(formData.get("steps"));
+        console.log(formData.get("ingredients"));
+        console.log(formData.get("ingredientsUnits"));
+        console.log(formData.get("ingredientsQuantities"));
 
         return http.post("/addDish",formData,{
             headers:{

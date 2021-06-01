@@ -5,55 +5,78 @@ import DishService from "../services/dish.service"
 
 class Dish extends Component{
 
+
+
     constructor(props) {
         super(props);
+        const  PATH_URL = '../../../resources/static/images/';
 
         this.state = {
             dishTitle: null,
             dishDesc: null,
-            dishPreparationTime: null,
-            dishNumberOfPerson: null,
-            dishDifficutly: null,
-            dishSteps: [],
-            dishIngredients: [],
-            dishIngredientsUnits: [],
-            dishIngredientsQuantities: []
+            preparationTimeQuantity: 0,
+            preparationTimeUnit: null,
+            numberOfPeople: null,
+            difficulty: null,
+            steps: [],
+            ingredients: [],
+            ingredientsUnits: [],
+            ingredientsQuantities: [],
+            image: null
         };
-        /*
-        DishService.getSpecificRecipe().then(
+
+        DishService.getSpecificRecipe(window.location.href.split('/')[4]).then(
             response => {
-                this.setState()
+                this.setState({
+                    dishTitle: response.data.dishName,
+                    dishDesc: response.data.dishDesc,
+                    preparationTimeQuantity: response.data.preparationTimeQuantity,
+                    preparationTimeUnit: response.data.preparationTimeUnit,
+                    numberOfPeople: response.data.numberOfPeople,
+                    difficulty: response.data.difficulty,
+                    steps: response.data.steps,
+                    ingredients: response.data.ingredients,
+                    ingredientsUnits: response.data.ingredientsUnits,
+                    ingredientsQuantities: response.data.ingredientsQuantities,
+                    image: response.data.image
+                });
+                console.log(response.data)
             },
             error => {
+                this.setState({
+                    content:
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString()
+                });
+            });
 
-            }
-        )*/
 
     }
 
 
     render() {
+        console.log(this.state.dishTitle);
         return (
             <div>
                 <div className="container-fluid col-12 my-dish">
                     <div className="row">
                         <div className="col-7 mt-2">
-                            <img className="d-block w-100 image-class  " src="../static/images/lunch.jpg"></img>
+                            <img className="d-block w-100 image-class"  src={process.env.PUBLIC_URL + `/${this.state.image}`}/>
                         </div>
                         <div className="col-5 jumbotron jumbotron-fluid  bg-light text-dark pt-0">
                             <div className="container">
-                                <h1 className="display-4">Lorem ipsum</h1>
-                                <p className="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-                                    fringilla ligula a neque blandit auctor. Nulla viverra felis varius scelerisque
-                                    facilisis. Mauris fermentum vulputate purus ac malesuada. Aliquam aliquam mi vel tempor
-                                    dictum. Curabitur et sapien dignissim, lacinia eros non, pharetra diam.</p>
-                                <hr className="my-4"></hr>
-                                <h4>Preparation time : X</h4>
-                                <hr className="my-4"></hr>
+                                <h1 className="display-4">{this.state.dishTitle}</h1>
+                                <p className="lead">{this.state.dishDesc}</p>
+                                <hr className="my-4"/>
+                                <h4>Preparation time : {this.state.preparationTimeQuantity} {this.state.preparationTimeUnit}</h4>
+                                <hr className="my-4"/>
                                 <h4>Number of person : X</h4>
-                                <hr className="my-4"></hr>
+                                <hr className="my-4"/>
                                 <h4>Difficulty : X</h4>
-                                <hr className="my-4"></hr>
+                                <hr className="my-4"/>
                             </div>
                         </div>
                     </div>
