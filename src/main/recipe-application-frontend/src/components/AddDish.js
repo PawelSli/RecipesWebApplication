@@ -15,14 +15,14 @@ export default class AddDish extends Component{
 
     changeStepHandler = (event,index) => {
         const newSteps = [...this.state.selectedSteps];
-        newSteps[index] = event.target.value;
+        newSteps[index] = event.target.value.replace(/,/g, ' ');
         this.setState({selectedSteps : newSteps});
         console.log(newSteps);
     }
 
     changeIngredientsHandler = (event,index) => {
         const newIngredients = [...this.state.selectedIngredients];
-        newIngredients[index] = event.target.value;
+        newIngredients[index] = event.target.value.replace(/,/g, ' ');
         this.setState({selectedIngredients : newIngredients});
         console.log(newIngredients);
     }
@@ -36,7 +36,7 @@ export default class AddDish extends Component{
 
     changeIngredientsQuantitiesHandler = (event,index) => {
         const newIngredientsQuantities = [...this.state.selectedIngredientsQuantities];
-        newIngredientsQuantities[index] = event.target.value;
+        newIngredientsQuantities[index] = event.target.value.replace(/,/g, '.') ;
         this.setState({selectedIngredientsQuantities : newIngredientsQuantities});
         console.log(newIngredientsQuantities);
     }
@@ -145,7 +145,7 @@ export default class AddDish extends Component{
             steps.push(
                 <div className="mb-4 my-step-class">
                     <label className="form-label text-danger">Step nr {i}</label>
-                    <textarea onChange={action => this.changeStepHandler(action,i)} className="form-control" placeholder="Description - Step " rows="3"/>
+                    <textarea onChange={action => this.changeStepHandler(action,i)} className="form-control" placeholder="Description - step " rows="3"/>
                 </div>
             )
         }
@@ -158,7 +158,7 @@ export default class AddDish extends Component{
                     <label className="form-label">Amount of the ingredient</label>
                     <div className="row">
                         <div className="col-7">
-                            <input type="number" onChange={action => this.changeIngredientsQuantitiesHandler(action,i)} className="form-control" min="1" max="1000"/>
+                            <input type="number" step=".01" onChange={action => this.changeIngredientsQuantitiesHandler(action,i)} className="form-control" min="0" max="1000"/>
                         </div>
                         <div className="col-5">
                             <select onChange={action => this.changeIngredientsUnitsHandler(action,i)}  className="custom-select">
@@ -236,7 +236,7 @@ export default class AddDish extends Component{
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Define difficulty of dish:</label>
+                                <label className="form-label">Define difficulty123 of dish:</label>
                                 <select ref={this.selectedDifficulty} className="custom-select">
                                     {this.state.recipeDifficulties.map(item =>{
                                         return <option value={item.index}>{item}</option>
