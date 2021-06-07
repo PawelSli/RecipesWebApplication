@@ -18,6 +18,20 @@ class DishService{
         });
     }
 
+    searchDishes(value){
+        let config ={
+            params: {
+                query: value
+            },
+            headers: {
+                'Access-Control-Allow-Origin': true
+            },
+            mode : 'cors',
+        };
+
+        return axios.get(API_URL+"search",config);
+    }
+
 
     getAddDishPage(){
         return axios.get(API_URL+"addDish",{headers: authHeader()})
