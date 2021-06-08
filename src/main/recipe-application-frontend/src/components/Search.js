@@ -97,7 +97,7 @@ class Search extends Component {
                     <div className="col-12 col-sm-6 col-md-4 "
                           >
                         <div className="card my-card mt-2 ml-2 my-card my-mouse-press"
-                             onClick={() => window.location.href = `/recipe/${this.state.dishes[i].dishName}`}>
+                             onClick={() => window.location.href = `/recipe/${this.state.dishes[i].id}`}>
                             <img className="card-img-top"
                                  src={process.env.PUBLIC_URL + `/${this.state.dishes[i].image}`}
                                  alt="Card image cap"/>
