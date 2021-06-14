@@ -64,18 +64,13 @@ public class RecipeServiceImpl implements RecipeService {
     public List<CompleteRecipeDTO> searchRecipes(String query) {
         String[] words = query.strip().split(" ");
         List<String> stringList= Arrays.stream(words).map(e -> "%"+e+"%").collect(Collectors.toList());
-        stringList.forEach(System.out::println);
 
         List<Recipe> recipeList = recipeRepository.findAll(RecipeRepository.multiLikeColumn(stringList));
         List<Ingredient> ingredientList = ingredientRepository.findAll(IngredientRepository.multiLikeColumn(stringList));
-        if(ingredientList.isEmpty()) System.out.println("Something is not yes");
         List<Recipe> recipesByIngredients = ingredientList.stream().map(this::findRecipeByIngredient).collect(Collectors.toList());
-        if(recipesByIngredients.isEmpty()) System.out.println("Something is not yes");
 
         List<Recipe> finalList = new ArrayList<>(recipeList);
         finalList.addAll(recipesByIngredients.stream().filter(e -> !recipeList.contains(e)).collect(Collectors.toList()));
-        if(finalList.isEmpty()) System.out.println("Something is not yes");
-
 
         return finalList.stream().map(this::prepareRecipeDTO).collect(Collectors.toList());
     }

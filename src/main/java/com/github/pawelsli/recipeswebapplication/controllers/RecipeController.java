@@ -55,7 +55,6 @@ public class RecipeController {
     public ResponseEntity<?> uploadDish(@RequestParam MultipartFile file,
                                         @Validated @ModelAttribute CompleteRecipeDTO completeRecipeDTO,
                                         @AuthenticationPrincipal UserDetailsImpl user) {
-        System.out.println("HMMMMM123");
         completeRecipeDTO.setUserID(user.getId());
         recipeService.addRecipe(file, completeRecipeDTO);
 
