@@ -179,7 +179,7 @@ export default class AddDish extends Component{
             <div
                 className="container col-12 bg-light text-capitalize  d-flex flex-column  justify-content-center mt-5 ">
                 <div className="row justify-content-center ">
-                    <div className="col-6 align-items-center">
+                    <div className="col-12 col-md-9 col-lg-6 align-items-center">
                         <h1>Add dish</h1>
                         <form>
                             <div className="mb-3">
