@@ -97,10 +97,10 @@ class Dish extends Component{
             <div>
                 <div className="container-fluid col-12 my-dish">
                     <div className="row">
-                        <div className="col-7 mt-2">
+                        <div className="col-12 col-lg-7 mt-2">
                             <img className="d-block w-100 image-class"  src={process.env.PUBLIC_URL + `/${this.state.image}`}/>
                         </div>
-                        <div className="col-5 jumbotron jumbotron-fluid  bg-light text-dark pt-0">
+                        <div className="col-12 col-lg-5 jumbotron jumbotron-fluid  bg-light text-dark pt-0">
                             <div className="container">
                                 <h1 className="display-4">{this.state.dishTitle}</h1>
                                 <p className="lead">{this.state.dishDesc}</p>
@@ -117,10 +117,10 @@ class Dish extends Component{
                 </div>
                 <div className="container-fluid col-12 pt-0 mt-0">
                     <div className="row">
-                        <div className="col-7 jumbotron jumbotron-fluid  bg-light text-dark pt-0 mt-0 pl-3">
+                        <div className="col-12  col-lg-7 jumbotron jumbotron-fluid  bg-light text-dark pt-0 mt-0 pl-3">
                             {tempSteps}
                         </div>
-                        <div className="col-5 jumbotron jumbotron-fluid  bg-light text-dark pt-0 mt-0 text-center">
+                        <div className="col-12 col-lg-5 jumbotron jumbotron-fluid  bg-light text-dark pt-0 mt-0 text-center">
                             <h1 className="display-5 text-center">Ingredients</h1>
                             {tempIngredients}
                         </div>
