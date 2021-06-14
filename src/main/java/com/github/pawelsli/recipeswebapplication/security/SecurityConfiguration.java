@@ -55,24 +55,6 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /*
-        http.
-                cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and().
-                csrf().disable().
-                authorizeRequests().
-                    antMatchers("/api/auth/signin").permitAll().
-                    antMatchers("/api/auth/signup").permitAll().
-                    antMatchers("/mainPage").permitAll().
-                    antMatchers("/mainPage").permitAll().
-                    antMatchers("/recipe/**").permitAll().
-                    antMatchers("/search/**").permitAll().
-                    anyRequest().authenticated().
-                and().
-                    formLogin().loginPage("/login").permitAll().
-                and().
-                    logout().invalidateHttpSession(true).
-                    clearAuthentication(true).permitAll();
-        */
         http.
                 cors().and().csrf().disable().
                 exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and().
@@ -103,7 +85,6 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.authenticationProvider(authenticationProvider());
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }

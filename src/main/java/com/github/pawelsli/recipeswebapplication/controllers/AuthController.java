@@ -27,8 +27,6 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> login(@Validated @RequestBody UserLoginDTO loginRequest) {
-        System.out.println(loginRequest.getEmail());
-        System.out.println(loginRequest.getPassword());
         JwtResponse jwtResponse = userService.authenticateUser(loginRequest);
 
         return ResponseEntity.ok(jwtResponse);
