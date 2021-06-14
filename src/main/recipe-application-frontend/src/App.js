@@ -44,16 +44,16 @@ class App extends Component {
             <Router history={history}>
                 <div className="App">
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark main">
-                        <a className="navbar-brand" href="/">Oveneaten</a>
+                        <a className="navbar-brand " href="/">Oveneaten</a>
                         <form className="form-inline">
-                            <input className="form-control mr-sm-2" ref={this.linkRef}
+                            <input className="form-control mr-sm-2 main-navigation" ref={this.linkRef}
                                    onKeyPress={(event => this.handleEnterPress(event))}
                                    type="search" placeholder="Search" aria-label="Search"/>
-                            <button type='button' className="btn btn-outline-success my-2 my-sm-0"
+                            <button type='button' className="btn btn-outline-success my-2 my-sm-0 search-button"
                                     onClick={() => window.location.href = `/search?query=${this.linkRef.current.value}`}>Search
                             </button>
                         </form>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse"
+                        <button className="navbar-toggler collapse-button" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false"
                                 aria-label="Toggle navigation">

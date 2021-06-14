@@ -68,3 +68,16 @@ body{
 .main-carousel img{
     height: 75vh;
 }
+
+@media all and (max-width: 350px) {
+    .main-navigation {
+        width: 90%;
+        margin-right: 2em;
+    }
+
+    .search-button{
+        width: 90%;
+        margin-right: 2em;
+    }
+
+}

@@ -170,6 +170,7 @@ public class CompleteRecipeDTO {
         atomicInteger.set(0);
         List<IngredientDTO> ingredientDTOList = new ArrayList<>();
         List<RecipeIngredientDTO> recipeIngredientDTOS = new ArrayList<>();
+
         ingredients.forEach(e -> {
             System.out.println(e);
             if (atomicInteger.get() != 0) {
@@ -178,6 +179,7 @@ public class CompleteRecipeDTO {
                 ingredientDTOList.add(ingredientDTO);
                 RecipeIngredientDTO recipeIngredientDTO = new RecipeIngredientDTO();
                 recipeIngredientDTO.setIngredientQuantity(Double.parseDouble(ingredientsQuantities.get(atomicInteger.get())));
+                System.out.println(ingredientsUnits.get(atomicInteger.get()));
                 System.out.println(ingredientsUnits.get(atomicInteger.get()));
                 recipeIngredientDTO.setIngredientUnit(IngredientUnit.valueOf(ingredientsUnits.get(atomicInteger.get())));
                 recipeIngredientDTOS.add(recipeIngredientDTO);
