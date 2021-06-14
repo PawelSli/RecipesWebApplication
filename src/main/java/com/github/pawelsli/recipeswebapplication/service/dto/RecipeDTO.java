@@ -129,11 +129,11 @@ public class RecipeDTO {
         Recipe recipe = new Recipe();
         recipe.setTitle(title);
         recipe.setDescription(description);
-        recipe.setPreparation_time(preparationTime);
-        recipe.setTime_unit(timeUnit);
-        recipe.setPublication_date(publicationDate);
+        recipe.setPreparationTime(preparationTime);
+        recipe.setTimeUnit(timeUnit);
+        recipe.setPublicationDate(publicationDate);
         recipe.setDifficulty(difficulty);
-        recipe.setPeople_num(peopleNum);
+        recipe.setPeopleNumber(peopleNum);
         recipe.setImage(imageName);
         recipe.setLikes(0L);
         recipe.setDislikes(0L);

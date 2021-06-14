@@ -21,7 +21,7 @@ import org.springframework.web.cors.CorsConfiguration;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
- class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
+class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_WHITELIST = {
             // -- swagger ui
@@ -49,7 +49,7 @@ import org.springframework.web.cors.CorsConfiguration;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -79,8 +79,9 @@ import org.springframework.web.cors.CorsConfiguration;
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/api/auth/signup").permitAll()
-                .antMatchers("/mainPage").permitAll()
-                .antMatchers("/recipe/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/recipe/*").permitAll()
+                .antMatchers("/search*").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -88,13 +89,13 @@ import org.springframework.web.cors.CorsConfiguration;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/webjars/**","/js/**","/img/**");
+        web.ignoring().antMatchers("/css/**", "/webjars/**", "/js/**", "/img/**");
 
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         authenticationProvider.setUserDetailsService(userDetailsService);
         return authenticationProvider;

@@ -17,7 +17,7 @@ public class User {
     @Column(name="id",nullable=false,unique=true)
     private Long id;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Recipe> recipeList;
 
     @Column(name = "email")
@@ -39,7 +39,7 @@ public class User {
     @Column(name = "image")
     private String image;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
@@ -66,6 +66,10 @@ public class User {
         this.roles = roles;
         this.jointAt=jointAt;
         this.phone=phone;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

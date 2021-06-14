@@ -6,10 +6,12 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Search from "./components/Search";
 import Dish from "./components/Dish";
+import Profile from "./components/Profile"
 import PrivateRoute from './components/PrivateRoute';
 import MainPage from "./components/MainPage";
 import history from "./services/history";
 import { Router} from 'react-router-dom';
+import AuthService from "./services/auth.service"
 import { useLocation } from "react-router-dom";
 
 
@@ -18,7 +20,15 @@ class App extends Component {
         super(props);
         this.linkRef = React.createRef();
         this.handleEnterPress = this.handleEnterPress.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
+
     }
+
+    handleLogout = event => {
+        localStorage.removeItem('user');
+        window.location.reload();
+    }
+
 
     handleEnterPress = event => {
         if (event.key === 'Enter') {
@@ -64,13 +74,11 @@ class App extends Component {
                                         <a className="dropdown-item" href="#">Etc.</a>
                                     </div>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Tips&Tricks</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Contact</a>
-                                </li>
-                                <a className="btn btn-outline-primary" href="#">Log in</a>
+                                { AuthService.isLogged() &&(<li className="nav-item"><a className="nav-link" href="/profile">Profile</a></li>)}
+                                { AuthService.isLogged() &&(<li className="nav-item"><a className="nav-link" href="/addDish">AddRecipe</a></li>)}
+                                { !AuthService.isLogged() && <a className="btn btn-outline-primary mr-2" href="/api/auth/signin">Log in</a>}
+                                { AuthService.isLogged() && <a className="btn btn-outline-primary mr-2" onClick={this.handleLogout}>Log out</a>}
+
                             </ul>
                         </div>
                     </nav>
@@ -78,6 +86,7 @@ class App extends Component {
                     <div className="container col-12">
                         <Switch>
                             <PrivateRoute exact path="/addDish" component={AddDish}/>
+                            <PrivateRoute exact path="/profile" component={Profile}/>
                             <Route exact path="/api/auth/signup" component={Register}/>
                             <Route exact path="/api/auth/signin" component={Login}/>
                             <Route exact path="/search" component={Search}/>

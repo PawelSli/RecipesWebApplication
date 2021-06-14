@@ -55,25 +55,22 @@ class MainPage extends Component {
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"/>
                             </ol>
                             <div className="carousel-inner ">
-                                <div className="carousel-item active align-items-center my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.randomDishes[0].id}`}>
+                                <div className="carousel-item active align-items-center my-carousel-class my-mouse-press main-carousel text-center" onClick={() => window.location.href = `/recipe/${this.state.randomDishes[0].id}`}>
                                     <img className="d-block w-100 image-class  " src={process.env.PUBLIC_URL + `/${this.state.randomDishes[0].image}`} alt="First slide"/>
-                                    <div className="carousel-caption d-none d-md-block my-carousel-text text-dark">
+                                    <div className="carousel-caption d-none d-md-block my-carousel-text text-dark ">
                                         <h5>{this.state.randomDishes[0].dishName}</h5>
-                                        <p>Some representative placeholder for breakfast description.</p>
                                     </div>
                                 </div>
-                                <div className="carousel-item align-items-center my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.randomDishes[1].id}`}>
+                                <div className="carousel-item align-items-center my-carousel-class my-mouse-press main-carousel text-center" onClick={() => window.location.href = `/recipe/${this.state.randomDishes[1].id}`}>
                                     <img className="d-block w-100 image-class  col-12" src={process.env.PUBLIC_URL + `/${this.state.randomDishes[1].image}`} alt="Second slide"/>
-                                    <div className="carousel-caption d-none d-md-block my-carousel-text text-dark">
+                                    <div className="carousel-caption d-none d-md-block my-carousel-text text-dark ">
                                         <h5>{this.state.randomDishes[1].dishName}</h5>
-                                        <p>Some representative placeholder for breakfast description.</p>
                                     </div>
                                 </div>
-                                <div className="carousel-item align-items-center my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.randomDishes[2].id}`}>
+                                <div className="carousel-item align-items-center my-carousel-class my-mouse-press main-carousel text-center" onClick={() => window.location.href = `/recipe/${this.state.randomDishes[2].id}`}>
                                     <img className="d-block w-100 image-class " src={process.env.PUBLIC_URL + `/${this.state.randomDishes[2].image}`} alt="Third slide"/>
-                                    <div className="carousel-caption d-none d-md-block my-carousel-text text-dark">
+                                    <div className="carousel-caption d-none d-md-block my-carousel-text text-dark ">
                                         <h5>{this.state.randomDishes[2].dishName}</h5>
-                                        <p>Some representative placeholder for dinner description.</p>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +127,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[0].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.bestDishes[1].id}`}>
@@ -138,7 +134,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[1].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.bestDishes[2].id}`}>
@@ -146,7 +141,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[2].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +152,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[3].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.bestDishes[4].id}`}>
@@ -166,7 +159,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[4].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-4 my-carousel-class my-mouse-press"  onClick={() => window.location.href = `/recipe/${this.state.bestDishes[5].id}`}>
@@ -174,7 +166,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[5].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +177,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[6].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.bestDishes[7].id}`} >
@@ -194,7 +184,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[7].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-4 my-carousel-class my-mouse-press"  onClick={() => window.location.href = `/recipe/${this.state.bestDishes[8].id}`}>
@@ -202,7 +191,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.bestDishes[8].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +224,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[0].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-lg-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.newestDishes[1].id}`}>
@@ -244,7 +231,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[1].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-lg-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.newestDishes[2].id}`}>
@@ -252,7 +238,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[2].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -264,7 +249,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[3].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-lg-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.newestDishes[4].id}`}>
@@ -272,7 +256,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[4].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-lg-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.newestDishes[5].id}`}>
@@ -280,7 +263,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[5].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -292,7 +274,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[6].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-lg-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.newestDishes[7].id}`}>
@@ -300,7 +281,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[7].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-lg-4 my-carousel-class my-mouse-press" onClick={() => window.location.href = `/recipe/${this.state.newestDishes[8].id}`}>
@@ -308,7 +288,6 @@ class MainPage extends Component {
                                             <div
                                                 className="carousel-caption d-none d-md-block my-carousel-text text-dark">
                                                 <h5>{this.state.newestDishes[8].dishName}</h5>
-                                                <p>Some representative placeholder for breakfast description.</p>
                                             </div>
                                         </div>
                                     </div>

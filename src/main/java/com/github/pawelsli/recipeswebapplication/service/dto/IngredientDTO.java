@@ -3,14 +3,22 @@ package com.github.pawelsli.recipeswebapplication.service.dto;
 import com.github.pawelsli.recipeswebapplication.entity.Ingredient;
 
 public class IngredientDTO {
-    private long id;
+    private Long id;
     private String title;
 
-    public long getId() {
+    public IngredientDTO() {
+    }
+
+    public IngredientDTO(Ingredient ingredient) {
+        this.id = ingredient.getId();
+        this.title = ingredient.getTitle();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

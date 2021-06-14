@@ -9,7 +9,8 @@ public class DifficultyAndUnitsDTO {
     private List<IngredientUnit> ingredientUnitList;
     private List<RecipeDifficulty> recipeDifficulties;
 
-    public DifficultyAndUnitsDTO(List<IngredientUnit> ingredientUnitList, List<RecipeDifficulty> recipeDifficulties) {
+    public DifficultyAndUnitsDTO(List<IngredientUnit> ingredientUnitList,
+                                 List<RecipeDifficulty> recipeDifficulties) {
         this.ingredientUnitList = ingredientUnitList;
         this.recipeDifficulties = recipeDifficulties;
     }

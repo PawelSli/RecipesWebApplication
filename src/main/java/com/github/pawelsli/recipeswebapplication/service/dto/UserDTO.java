@@ -1,5 +1,7 @@
 package com.github.pawelsli.recipeswebapplication.service.dto;
 
+import com.github.pawelsli.recipeswebapplication.entity.User;
+
 public class UserDTO {
     private Long id;
     private String email;
@@ -45,5 +47,15 @@ public class UserDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public User convertToUser(){
+        User user = new User();
+        user.setId(id);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPhone(phone);
+        user.setImage(image);
+        return user;
     }
 }

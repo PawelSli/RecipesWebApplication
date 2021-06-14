@@ -9,11 +9,20 @@ public class Step {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false)
     private Recipe recipe;
+    @Column(length = 512)
     private String description;
     private Long number;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Recipe getRecipe() {
         return recipe;
