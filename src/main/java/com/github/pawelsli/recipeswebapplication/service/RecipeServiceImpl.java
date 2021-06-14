@@ -77,6 +77,12 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Void addRecipe(MultipartFile file, CompleteRecipeDTO completeRecipeDTO) {
+        try {
+            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Could not store the file.");
+        }
 
         Quartet<RecipeDTO, List<StepDTO>, List<IngredientDTO>, List<RecipeIngredientDTO>> recipeDTO = completeRecipeDTO.convertToRecipeDTO();
         Recipe recipe = recipeDTO.getValue0().convertToRecipe();
@@ -102,13 +108,6 @@ public class RecipeServiceImpl implements RecipeService {
         ingredientRepository.saveAll(ingredientList);
         recipeIngredientRepository.saveAll(recipeIngredientList);
         stepRepository.saveAll(stepList);
-
-        try {
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Could not store the file.");
-        }
 
         return null;
     }

@@ -114,8 +114,8 @@ export default class Profile extends Component {
         }
 
         return (
-            <div className="row">
-                <div className="card">
+            <div className="row ">
+                <div className="card main-navigation">
                     <div className="card-body navigation-card">
                         <nav className="nav flex-column nav-pills nav-gap-y-1">
                             <a href="#profile" data-toggle="tab"
