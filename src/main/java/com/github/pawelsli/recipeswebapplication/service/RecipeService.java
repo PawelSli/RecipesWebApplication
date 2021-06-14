@@ -1,23 +1,23 @@
 package com.github.pawelsli.recipeswebapplication.service;
 
-import com.github.pawelsli.recipeswebapplication.entity.IngredientUnit;
-import com.github.pawelsli.recipeswebapplication.entity.Recipe;
-import com.github.pawelsli.recipeswebapplication.entity.RecipeDifficulty;
-import com.github.pawelsli.recipeswebapplication.service.dto.AddRecipeDTO;
+import com.github.pawelsli.recipeswebapplication.entity.User;
+import com.github.pawelsli.recipeswebapplication.service.dto.CompleteRecipeDTO;
 import com.github.pawelsli.recipeswebapplication.service.dto.DifficultyAndUnitsDTO;
 import com.github.pawelsli.recipeswebapplication.service.dto.MainPageDTO;
 import com.github.pawelsli.recipeswebapplication.service.dto.RecipeDTO;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface RecipeService {
-    public abstract Void addRecipe(MultipartFile file,AddRecipeDTO addRecipeDTO);
-    public abstract List<RecipeDTO> getRecipes();
-    public abstract List<RecipeDTO> getNewestRecipes();
-    public abstract List<RecipeDTO> getMostPopularRecipes();
-    public abstract MainPageDTO getMainPageDishes();
-    public abstract RecipeDTO findRecipeById(Long id);
-    public abstract DifficultyAndUnitsDTO getDifficultyAndUnits();
+    Void addRecipe(MultipartFile file, CompleteRecipeDTO completeRecipeDTO);
+    List<RecipeDTO> getRecipes();
+    List<CompleteRecipeDTO> getNewestRecipes();
+    List<CompleteRecipeDTO> getMostPopularRecipes();
+    List<CompleteRecipeDTO> getRandomRecipes();
+    MainPageDTO getMainPageDishes();
+    CompleteRecipeDTO findRecipeById(Long id);
+    List<CompleteRecipeDTO> getUserRecipes(User user);
+    DifficultyAndUnitsDTO getDifficultyAndUnits();
+    List<CompleteRecipeDTO> searchRecipes(String query);
 }

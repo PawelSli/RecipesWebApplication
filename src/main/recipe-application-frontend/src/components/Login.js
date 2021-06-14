@@ -123,7 +123,7 @@ class Login extends Component{
                             />
                         </div>
                         <div className="links m-1">
-                            Don't have an account? <a href="#">Sign Up</a>
+                            Don't have an account? <a href="/api/auth/signup">Sign Up</a>
                         </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
 

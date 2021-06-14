@@ -1,0 +1,70 @@
+.nav-link {
+    color: #4a5568;
+}
+
+.profile-body{
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.navigation-card{
+    width: 20vw;
+}
+
+.profile-textarea{
+    overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+    height: 62px;
+}
+
+.icon{
+    height: 1em;
+}
+
+.image-upload-class{
+    display: flex;
+    flex-direction: row;
+}
+
+.image-content-class{
+    height: 28vh;
+    width: 28vh;
+}
+
+.image-upload-file-class{
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.card-img-top{
+    max-height: 70vh;
+}
+
+.special-button{
+    width: 20vh;
+    height: 7vh;
+    margin: auto;
+}
+
+.image-class{
+    width: 100%;
+    height: 100%;
+}

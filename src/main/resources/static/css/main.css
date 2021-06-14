@@ -6,7 +6,6 @@ body{
 
 }
 
-
 .image-class{
     width: auto;
     height: 65vh;
@@ -21,3 +20,40 @@ body{
     overflow-y: auto;
 }
 
+.my-carousel-class {
+}
+
+.my-carousel-class img{
+    background-size: 100% 100%;
+}
+
+.my-carousel-class:hover img{
+    opacity: 0.5;
+}
+
+.my-carousel-class:hover .my-carousel-text{
+    opacity: 1;
+}
+
+/*
+@media(hover: hover) and (pointer: coarse) {
+    .my-carousel-class:hover img {
+        opacity: 0.5;
+    }
+    .my-carousel-class:hover .my-carousel-text{
+        opacity: 1;
+    }
+
+}
+*/
+.my-carousel-text{
+    opacity: 0;
+}
+
+.my-carousel-class img,
+.my-carousel-text {
+    -webkit-transition: opacity 0.5s ease-out;
+    -moz-transition: opacity 0.5s ease-out;
+    -o-transition: opacity 0.5s ease-out;
+    transition: opacity 0.5s ease-out;
+}

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AddRecipeDTO {
-    @JsonIgnore
+public class CompleteRecipeDTO {
+    private Long id;
     private Long userID;
     private String dishName;
     private String dishDesc;
@@ -26,6 +26,23 @@ public class AddRecipeDTO {
     private List<String> ingredientsQuantities;
     @JsonIgnore
     private LocalDateTime publicationDate;
+    private String image;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public Long getUserID() {
         return userID;
@@ -123,7 +140,8 @@ public class AddRecipeDTO {
         this.publicationDate = publicationDate;
     }
 
-    public Quartet<RecipeDTO, List<StepDTO>, List<IngredientDTO>,List<RecipeIngredientDTO>> convertToRecipeDTO() {
+
+    public Quartet<RecipeDTO, List<StepDTO>, List<IngredientDTO>, List<RecipeIngredientDTO>> convertToRecipeDTO() {
 
         RecipeDTO recipeDTO = new RecipeDTO();
         recipeDTO.setUserId(userID);
@@ -140,7 +158,7 @@ public class AddRecipeDTO {
         atomicInteger.set(0);
         List<StepDTO> stepDTOList = new ArrayList<>();
         steps.forEach(e -> {
-            if(atomicInteger.get()!=0){
+            if (atomicInteger.get() != 0) {
                 StepDTO stepDTO = new StepDTO();
                 stepDTO.setDescription(e);
                 stepDTO.setNumber((long) atomicInteger.get());
@@ -153,18 +171,20 @@ public class AddRecipeDTO {
         List<IngredientDTO> ingredientDTOList = new ArrayList<>();
         List<RecipeIngredientDTO> recipeIngredientDTOS = new ArrayList<>();
         ingredients.forEach(e -> {
-            if(atomicInteger.get()!=0){
+            System.out.println(e);
+            if (atomicInteger.get() != 0) {
                 IngredientDTO ingredientDTO = new IngredientDTO();
                 ingredientDTO.setTitle(e);
                 ingredientDTOList.add(ingredientDTO);
                 RecipeIngredientDTO recipeIngredientDTO = new RecipeIngredientDTO();
-                recipeIngredientDTO.setIngredientQuantity(Long.parseLong(ingredientsQuantities.get(atomicInteger.get())));
+                recipeIngredientDTO.setIngredientQuantity(Double.parseDouble(ingredientsQuantities.get(atomicInteger.get())));
+                System.out.println(ingredientsUnits.get(atomicInteger.get()));
                 recipeIngredientDTO.setIngredientUnit(IngredientUnit.valueOf(ingredientsUnits.get(atomicInteger.get())));
                 recipeIngredientDTOS.add(recipeIngredientDTO);
             }
             atomicInteger.incrementAndGet();
         });
         atomicInteger.set(0);
-        return Quartet.with(recipeDTO, stepDTOList, ingredientDTOList,recipeIngredientDTOS);
+        return Quartet.with(recipeDTO, stepDTOList, ingredientDTOList, recipeIngredientDTOS);
     }
 }

@@ -8,6 +8,16 @@ public class StepDTO {
     private Long number;
     private Long recipeId;
 
+    public StepDTO() {
+    }
+
+    public StepDTO(Step step) {
+        this.id = step.getId();
+        this.description = step.getDescription();
+        this.number = step.getNumber();
+        this.recipeId = step.getRecipe().getId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -46,4 +56,5 @@ public class StepDTO {
         step.setDescription(description);
         return step;
     }
+
 }

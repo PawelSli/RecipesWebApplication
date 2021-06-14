@@ -8,11 +8,19 @@ import java.util.List;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",nullable=false,unique=true)
+    @Column(name = "id", nullable = false, unique = true)
     private Long id;
     private String title;
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "ingredient",cascade = CascadeType.ALL)
     private List<RecipeIngredient> recipeIngredientSet;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

@@ -10,13 +10,22 @@ public class RecipeIngredient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id",referencedColumnName="id",nullable=false,unique=false)
     private Recipe recipe;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "ingredient_id",referencedColumnName="id",nullable=false,unique=true)
     private Ingredient ingredient;
-    private Long quantity;
+    private Double quantity;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Enumerated(EnumType.STRING)
     private IngredientUnit ingredientUnit;
 
@@ -36,11 +45,11 @@ public class RecipeIngredient {
         this.ingredient = ingredient;
     }
 
-    public Long getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

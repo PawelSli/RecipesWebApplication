@@ -3,24 +3,22 @@ package com.github.pawelsli.recipeswebapplication.service;
 import com.github.pawelsli.recipeswebapplication.entity.*;
 import com.github.pawelsli.recipeswebapplication.repository.*;
 import com.github.pawelsli.recipeswebapplication.service.dto.*;
+import com.github.pawelsli.recipeswebapplication.service.dto.builders.CompleteRecipeDtoBuilder;
 import org.javatuples.Quartet;
-import org.javatuples.Triplet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +30,7 @@ public class RecipeServiceImpl implements RecipeService {
     private IngredientRepository ingredientRepository;
     private RecipeIngredientRepository recipeIngredientRepository;
     private final static Logger log = LoggerFactory.getLogger(RecipeServiceImpl.class);
-    private final Path root = Paths.get("src/main/resources/static/images/");
+    private final Path root = Paths.get("src/main/recipe-application-frontend/public/");
 
     @Autowired
     public RecipeServiceImpl(RecipeRepository recipeRepository,
@@ -48,6 +46,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public MainPageDTO getMainPageDishes() {
+        return new MainPageDTO(getRandomRecipes(),getMostPopularRecipes(),getNewestRecipes());
+    }
+
+    @Override
     public DifficultyAndUnitsDTO getDifficultyAndUnits() {
 
         List<RecipeDifficulty> recipeDifficultyList = Arrays.asList(RecipeDifficulty.values());
@@ -58,9 +61,29 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Void addRecipe(MultipartFile file, AddRecipeDTO addRecipeDTO) {
+    public List<CompleteRecipeDTO> searchRecipes(String query) {
+        String[] words = query.strip().split(" ");
+        List<String> stringList= Arrays.stream(words).map(e -> "%"+e+"%").collect(Collectors.toList());
+        stringList.forEach(System.out::println);
 
-        Quartet<RecipeDTO, List<StepDTO>, List<IngredientDTO>, List<RecipeIngredientDTO>> recipeDTO = addRecipeDTO.convertToRecipeDTO();
+        List<Recipe> recipeList = recipeRepository.findAll(RecipeRepository.multiLikeColumn(stringList));
+        List<Ingredient> ingredientList = ingredientRepository.findAll(IngredientRepository.multiLikeColumn(stringList));
+        if(ingredientList.isEmpty()) System.out.println("Something is not yes");
+        List<Recipe> recipesByIngredients = ingredientList.stream().map(this::findRecipeByIngredient).collect(Collectors.toList());
+        if(recipesByIngredients.isEmpty()) System.out.println("Something is not yes");
+
+        List<Recipe> finalList = new ArrayList<>(recipeList);
+        finalList.addAll(recipesByIngredients.stream().filter(e -> !recipeList.contains(e)).collect(Collectors.toList()));
+        if(finalList.isEmpty()) System.out.println("Something is not yes");
+
+
+        return finalList.stream().map(this::prepareRecipeDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Void addRecipe(MultipartFile file, CompleteRecipeDTO completeRecipeDTO) {
+
+        Quartet<RecipeDTO, List<StepDTO>, List<IngredientDTO>, List<RecipeIngredientDTO>> recipeDTO = completeRecipeDTO.convertToRecipeDTO();
         Recipe recipe = recipeDTO.getValue0().convertToRecipe();
         Optional<User> user = userRepository.findById(recipeDTO.getValue0().getUserId());
         recipe.setUser(user.orElseThrow());
@@ -85,8 +108,6 @@ public class RecipeServiceImpl implements RecipeService {
         recipeIngredientRepository.saveAll(recipeIngredientList);
         stepRepository.saveAll(stepList);
 
-
-
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         } catch (Exception e) {
@@ -103,22 +124,65 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<RecipeDTO> getNewestRecipes() {
-        return null;
+    public List<CompleteRecipeDTO> getNewestRecipes() {
+        List<Recipe> recipeList = recipeRepository.findTop9ByOrderByPublicationDateDesc();
+
+        return recipeList.stream().map(this::prepareRecipeDTO).collect(Collectors.toList());
+
     }
 
     @Override
-    public List<RecipeDTO> getMostPopularRecipes() {
-        return null;
+    public List<CompleteRecipeDTO> getMostPopularRecipes() {
+        List<Recipe> recipeList = recipeRepository.findTop9ByOrderByLikesDesc();
+
+        return recipeList.stream().map(this::prepareRecipeDTO).collect(Collectors.toList());
     }
 
     @Override
-    public RecipeDTO findRecipeById(Long id) {
-        return null;
+    public List<CompleteRecipeDTO> getRandomRecipes() {
+        List<Recipe> recipeList = recipeRepository.findRandomRecipes();
+
+        return recipeList.stream().map(this::prepareRecipeDTO).collect(Collectors.toList());
     }
 
     @Override
-    public MainPageDTO getMainPageDishes() {
-        return null;
+    public List<CompleteRecipeDTO> getUserRecipes(User user){
+        List<Recipe> recipeList = recipeRepository.findAllByUser(user);
+
+        return recipeList.stream().map(this::prepareRecipeDTO).collect(Collectors.toList());
     }
+
+    @Override
+    public CompleteRecipeDTO findRecipeById(Long id) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+
+        return prepareRecipeDTO(recipe);
+    }
+
+    private CompleteRecipeDTO prepareRecipeDTO(Recipe recipe){
+        List<IngredientDTO> ingredientDTOList = recipe.getRecipeIngredientSet().
+                stream().map(e -> new IngredientDTO(e.getIngredient())).collect(Collectors.toList());
+
+        return CompleteRecipeDtoBuilder.makeCompleteRecipeDTO(
+                recipe.getId(),
+                recipe.getUser().getId(),
+                recipe.getTitle(),
+                recipe.getDescription(),
+                recipe.getPreparationTime(),
+                recipe.getTimeUnit(),
+                recipe.getPeopleNumber(),
+                recipe.getDifficulty().toString(),
+                recipe.getSteps().stream().map(StepDTO::new).collect(Collectors.toList()),
+                ingredientDTOList,
+                recipe.getRecipeIngredientSet().stream().map(RecipeIngredientDTO::new).collect(Collectors.toList()),
+                recipe.getPublicationDate(),
+                recipe.getImage());
+
+    }
+
+    public Recipe findRecipeByIngredient(Ingredient ingredient){
+        return ingredient.getRecipeIngredientSet().get(0).getRecipe();
+    }
+
+
 }

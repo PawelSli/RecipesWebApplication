@@ -11,23 +11,45 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",nullable=false,unique=true)
     private Long id;
-    @OneToMany(mappedBy = "recipe")
+
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Step> steps;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description",length = 1024)
     private String description;
-    private Long preparation_time;
-    private String time_unit;
-    private LocalDateTime publication_date;
+
+    @Column(name = "preparation_time")
+    private Long preparationTime;
+
+    @Column(name = "time_unit")
+    private String timeUnit;
+
+    @Column(name = "publication_date")
+    private LocalDateTime publicationDate;
+
     @Enumerated(EnumType.STRING)
     private RecipeDifficulty difficulty;
-    private Long people_num;
+
+    @Column(name = "people_num")
+    private Long peopleNumber;
+
+    @Column(name = "image")
     private String image;
+
+    @Column(name = "likes")
     private Long likes;
+
+    @Column(name = "dislikes")
     private Long dislikes;
-    @OneToMany(mappedBy = "recipe")
+
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL)
     private List<RecipeIngredient> recipeIngredientSet;
 
     public Recipe() {
@@ -78,20 +100,20 @@ public class Recipe {
         this.description = description;
     }
 
-    public Long getPreparation_time() {
-        return preparation_time;
+    public Long getPreparationTime() {
+        return preparationTime;
     }
 
-    public void setPreparation_time(Long preparationTime) {
-        this.preparation_time = preparationTime;
+    public void setPreparationTime(Long preparationTime) {
+        this.preparationTime = preparationTime;
     }
 
-    public LocalDateTime getPublication_date() {
-        return publication_date;
+    public LocalDateTime getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setPublication_date(LocalDateTime publicationDate) {
-        this.publication_date = publicationDate;
+    public void setPublicationDate(LocalDateTime publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public RecipeDifficulty getDifficulty() {
@@ -102,12 +124,12 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
-    public Long getPeople_num() {
-        return people_num;
+    public Long getPeopleNumber() {
+        return peopleNumber;
     }
 
-    public void setPeople_num(Long people_num) {
-        this.people_num = people_num;
+    public void setPeopleNumber(Long people_num) {
+        this.peopleNumber = people_num;
     }
 
     public String getImage() {
@@ -134,11 +156,11 @@ public class Recipe {
         this.dislikes = dislikes;
     }
 
-    public String getTime_unit() {
-        return time_unit;
+    public String getTimeUnit() {
+        return timeUnit;
     }
 
-    public void setTime_unit(String time_unit) {
-        this.time_unit = time_unit;
+    public void setTimeUnit(String time_unit) {
+        this.timeUnit = time_unit;
     }
 }

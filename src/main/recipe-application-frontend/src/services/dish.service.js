@@ -47,6 +47,16 @@ class DishService{
             },
         })
     }
+
+    getUserDishes(){
+        return axios.get(API_URL+`profile`,{
+            headers:{
+                Authorization: 'Bearer ' + JSON.parse(localStorage.getItem("user")).accessToken,
+                'Access-Control-Allow-Origin': true
+            },
+            mode : 'cors'
+        });
+    }
 }
 
 export default new DishService();

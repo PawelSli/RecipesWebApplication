@@ -9,7 +9,18 @@ public class RecipeIngredientDTO {
     private Long recipeId;
     private Long ingredientId;
     private IngredientUnit ingredientUnit;
-    private Long ingredientQuantity;
+    private Double ingredientQuantity;
+
+    public RecipeIngredientDTO() {
+    }
+
+    public RecipeIngredientDTO(RecipeIngredient recipeIngredient) {
+        this.id = recipeIngredient.getId();
+        this.recipeId = recipeIngredient.getRecipe().getId();
+        this.ingredientId = recipeIngredient.getIngredient().getId();
+        this.ingredientUnit = recipeIngredient.getIngredientUnit();
+        this.ingredientQuantity = recipeIngredient.getQuantity();
+    }
 
     public Long getId() {
         return id;
@@ -43,11 +54,11 @@ public class RecipeIngredientDTO {
         this.ingredientUnit = ingredientUnit;
     }
 
-    public Long getIngredientQuantity() {
+    public Double getIngredientQuantity() {
         return ingredientQuantity;
     }
 
-    public void setIngredientQuantity(Long ingredientQuantity) {
+    public void setIngredientQuantity(Double ingredientQuantity) {
         this.ingredientQuantity = ingredientQuantity;
     }
 
