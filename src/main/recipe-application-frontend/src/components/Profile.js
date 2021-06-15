@@ -171,11 +171,6 @@ export default class Profile extends Component {
                                                aria-describedby="fullNameHelp" value={this.state.email} disabled/>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="fullPhone">Phone number</label>
-                                        <input type="phone" className="form-control" id="fullPhone"
-                                               aria-describedby="fullNameHelp" value={this.state.phone} disabled/>
-                                    </div>
-                                    <div className="form-group">
                                         <label htmlFor="fullUsername">Username</label>
                                         <input type="phone" className="form-control" id="fullUsername"
                                                aria-describedby="fullNameHelp" value={this.state.userName} disabled/>

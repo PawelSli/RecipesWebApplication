@@ -5,6 +5,7 @@ import com.github.pawelsli.recipeswebapplication.repository.*;
 import com.github.pawelsli.recipeswebapplication.service.dto.*;
 import com.github.pawelsli.recipeswebapplication.service.dto.builders.CompleteRecipeDtoBuilder;
 import org.javatuples.Quartet;
+import org.jboss.jandex.Index;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,13 @@ public class RecipeServiceImpl implements RecipeService {
 
         List<Recipe> recipeList = recipeRepository.findAll(RecipeRepository.multiLikeColumn(stringList));
         List<Ingredient> ingredientList = ingredientRepository.findAll(IngredientRepository.multiLikeColumn(stringList));
-        List<Recipe> recipesByIngredients = ingredientList.stream().map(this::findRecipeByIngredient).collect(Collectors.toList());
+        List<Recipe> recipesByIngredients;
+        try{
+            recipesByIngredients  = ingredientList.stream().map(this::findRecipeByIngredient).collect(Collectors.toList());
+        }catch (IndexOutOfBoundsException exc){
+            recipesByIngredients = recipeRepository.findAll();
+        }
+
 
         List<Recipe> finalList = new ArrayList<>(recipeList);
         finalList.addAll(recipesByIngredients.stream().filter(e -> !recipeList.contains(e)).collect(Collectors.toList()));
@@ -104,10 +111,15 @@ public class RecipeServiceImpl implements RecipeService {
         });
         stepList.forEach(e -> e.setRecipe(recipe));
 
-        recipeRepository.save(recipe);
-        ingredientRepository.saveAll(ingredientList);
-        recipeIngredientRepository.saveAll(recipeIngredientList);
-        stepRepository.saveAll(stepList);
+        try{
+            recipeRepository.save(recipe);
+            ingredientRepository.saveAll(ingredientList);
+            recipeIngredientRepository.saveAll(recipeIngredientList);
+            stepRepository.saveAll(stepList);
+        }catch (Exception exc){
+            log.warn("Error");
+        }
+
 
         return null;
     }
