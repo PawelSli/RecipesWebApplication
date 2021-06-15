@@ -8,6 +8,8 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
+        this.linkMainRef = React.createRef();
+        this.handleEnterPress = this.handleEnterPress.bind(this);
         this.state = {
             bestDishes: [],
             newestDishes: [],
@@ -38,6 +40,14 @@ class MainPage extends Component {
 
 
     }
+
+    handleEnterPress = event => {
+        if (event.key === 'Enter') {
+            this.props.history.push(`/search?query=${this.linkRef.current}`)
+
+        }
+
+    };
 
 
     render() {
@@ -97,9 +107,12 @@ class MainPage extends Component {
                                 </p>
                                 <nav className="navbar navbar-light ">
                                     <form className="form-inline">
-                                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                               onKeyPress={(event => this.handleEnterPress(event))} ref={this.linkMainRef}/>
                                         <button className="btn btn-outline-success my-2 my-sm-0"
-                                                type="submit">Search
+                                                type="button"
+                                                onClick={() => window.location.href = `/search?query=${this.linkMainRef.current.value}`}
+                                                >Search
                                         </button>
                                     </form>
                                 </nav>
